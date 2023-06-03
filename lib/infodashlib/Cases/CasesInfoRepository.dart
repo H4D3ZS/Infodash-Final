@@ -26,12 +26,12 @@ class CasesInfoRepository extends BaseRecordRepository<CasesRecord> {
       CasesRecord currentRecord = CasesRecord();
       var info = <CasesInfo>[];
       currentRecord.BaranggayName = baranggay;
-      final initial_data = elements.data();
-      currentRecord.ActiveCaseCount = initial_data['initial_active'];
-      currentRecord.SuspectedCaseCount = initial_data['initial_suspected'];
-      currentRecord.RecoveryCount = initial_data['initial_recovery'];
-      currentRecord.DeathCount = initial_data['initial_death'];
-      currentRecord.Marking = initial_data['marking'];
+      final initialData = elements.data();
+      currentRecord.ActiveCaseCount = initialData['initial_active'];
+      currentRecord.SuspectedCaseCount = initialData['initial_suspected'];
+      currentRecord.RecoveryCount = initialData['initial_recovery'];
+      currentRecord.DeathCount = initialData['initial_death'];
+      currentRecord.Marking = initialData['marking'];
       final caseRecord = await GetSubCollection("$baranggay/Cases");
       for (var record in caseRecord.docs) {
         var data = new CasesInfo();
@@ -68,7 +68,7 @@ class CasesInfoRepository extends BaseRecordRepository<CasesRecord> {
   }
 
   Future<void> UpdateBaranggayMarking(String baranggay, String marking) async {
-    UpdateLog(baranggay, "Changed Marking To " + marking);
+    UpdateLog(baranggay, "Changed Marking To $marking");
     await CollectionReferenceData.doc(baranggay).update({'marking': marking});
   }
 
@@ -80,48 +80,48 @@ class CasesInfoRepository extends BaseRecordRepository<CasesRecord> {
   }
 
   Future<void> SaveBaranggayRecord(
-      String baranggay, CaseStatus _status, int count) async {
+      String baranggay, CaseStatus status, int count) async {
     final data = await GetSingleCollection(baranggay).get();
-    switch (_status) {
+    switch (status) {
       case CaseStatus.active:
         {
           int active = data['initial_active'];
-          UpdateLog(baranggay, "Added Active: " + count.toString());
+          UpdateLog(baranggay, "Added Active: $count");
           await CollectionReferenceData.doc(baranggay)
               .update({'initial_active': active + count});
         }
         break;
       case CaseStatus.suspected:
         int active = data['initial_suspected'];
-        UpdateLog(baranggay, "Added Suspected: " + count.toString());
+        UpdateLog(baranggay, "Added Suspected: $count");
         await CollectionReferenceData.doc(baranggay)
             .update({'initial_suspected': active + count});
         break;
       case CaseStatus.recovered:
         int active = data['initial_recovery'];
-        UpdateLog(baranggay, "Added Recovered: " + count.toString());
+        UpdateLog(baranggay, "Added Recovered: $count");
         await CollectionReferenceData.doc(baranggay)
             .update({'initial_recovery': active + count});
         break;
       case CaseStatus.death:
         int active = data['initial_death'];
-        UpdateLog(baranggay, "Added Death: " + count.toString());
+        UpdateLog(baranggay, "Added Death: $count");
         await CollectionReferenceData.doc(baranggay)
             .update({'initial_death': active + count});
         break;
     }
   }
 
-  Future<void> SaveCaseRecord(String baranggay, CaseStatus _status,
-      String _concern, dynamic detailsData) async {
+  Future<void> SaveCaseRecord(String baranggay, CaseStatus status,
+      String concern, dynamic detailsData) async {
     var userEmail = await FlutterSession().get("_userEmail");
     Map<String, dynamic> data = {
-      "status_id": _status.index,
+      "status_id": status.index,
       "date_reported": DateTime.now(),
       // "date_verified": DateTime.now(),
       "reported_by": userEmail,
       // "verified_by": userEmail,
-      "concern": _concern,
+      "concern": concern,
       "step": 0
     };
     data.addAll(detailsData);
@@ -165,7 +165,7 @@ class CasesInfoRepository extends BaseRecordRepository<CasesRecord> {
   Future<void> SaveInitialData(String baranggay, dynamic data) async {
     DocumentReference doc = CollectionReferenceData.doc(baranggay);
     doc.set(data);
-    UpdateLog(baranggay, "Updates Initial Data " + baranggay);
+    UpdateLog(baranggay, "Updates Initial Data $baranggay");
     if (data['initial_active'] >= 20) {
       UpdateBaranggayMarking(baranggay, "Unsafe");
     } else {

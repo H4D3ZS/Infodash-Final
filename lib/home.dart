@@ -6,7 +6,6 @@ import 'package:flutter_session/flutter_session.dart';
 import 'package:infodash_app/main.dart';
 import 'package:infodash_app/pages/casespage.dart';
 import 'package:infodash_app/pages/homepage.dart';
-import 'package:infodash_app/pages/notificationpage.dart';
 import 'package:infodash_app/pages/reportedcasepage.dart';
 import 'package:infodash_app/pages/swabcenterpage.dart';
 import 'package:infodash_app/pages/vaccinatedpage.dart';
@@ -16,7 +15,7 @@ import 'package:intl/intl.dart';
 import 'dart:math';
 import 'package:badges/badges.dart' as badges;
 
-final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
+const Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 final Color avatarColor =
     Colors.primaries[Random().nextInt(Colors.primaries.length)];
 
@@ -82,7 +81,7 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    // screen_size = MediaQuery.of(context).size;
+    screen_size = MediaQuery.of(context).size;
 
     if (!_large) {
       if (_size != 0.0) {
@@ -101,7 +100,7 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
               Container(
                   child: AnimatedSize(
                       curve: Curves.easeIn,
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       child: LeftDrawer(
                         size: _size,
                         parent: this,
@@ -113,36 +112,37 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                     children: [
                       Container(
                         color: Colors.white,
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         child: ClipRect(
                           child: Expanded(
                             child: Row(
                               children: [
                                 IconButton(
-                                  icon: Icon(Icons.menu, color: Colors.black87),
+                                  icon: const Icon(Icons.menu,
+                                      color: Colors.black87),
                                   onPressed: () {
                                     // _size = screen_size.width / 2;
                                     _updateSize();
                                   },
                                 ),
-                                Text("Welcome Back ${fullname}!"),
-                                Spacer(),
+                                Text("Welcome Back $fullname!"),
+                                const Spacer(),
                                 StreamBuilder<List<dynamic>>(
                                     stream: GetNotificationData(userId),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         var data = snapshot.data!;
 
-                                        data.forEach((element) {
+                                        for (var element in data) {
                                           bool isRead = element['read'] as bool;
                                           if (!isRead) {
                                             hasUnreadNotification = true;
                                           }
-                                        });
+                                        }
                                         return badges.Badge(
                                           ignorePointer: false,
                                           showBadge: hasUnreadNotification,
-                                          badgeContent: Text(''),
+                                          badgeContent: const Text(''),
                                           position:
                                               badges.BadgePosition.topStart(
                                                   start: 8),
@@ -159,19 +159,19 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                                             tooltip: "Show Notifications",
                                             position: PopupMenuPosition.under,
                                             shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20)
-                                                        .copyWith(
-                                                            topRight:
-                                                                Radius.circular(
-                                                                    0))),
-                                            icon: Icon(Icons.notifications),
+                                                borderRadius: BorderRadius
+                                                        .circular(20)
+                                                    .copyWith(
+                                                        topRight: const Radius
+                                                            .circular(0))),
+                                            icon:
+                                                const Icon(Icons.notifications),
                                             elevation: 10,
                                             color: Colors.grey.shade300,
                                             itemBuilder: (context) {
-                                              if (data.length <= 0) {
+                                              if (data.isEmpty) {
                                                 return [
-                                                  PopupMenuItem(
+                                                  const PopupMenuItem(
                                                       child: Text(
                                                           "No Notifications"))
                                                 ].toList();
@@ -217,12 +217,13 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                                           ),
                                         );
                                       } else {
-                                        return Text("Loading Notification");
+                                        return const Text(
+                                            "Loading Notification");
                                       }
                                     }),
                                 CircleAvatar(
                                   backgroundColor: avatarColor,
-                                  child: Text("${userEmail[0].toUpperCase()}"),
+                                  child: Text(userEmail[0].toUpperCase()),
                                 ),
                               ],
                             ),
@@ -288,12 +289,12 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                 elevation: 0,
                 color: Colors.grey.shade300,
                 child: Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Column(
                     children: [
                       Text(
                         '${data['sent_by']} sent a notification',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       Row(
@@ -302,16 +303,16 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Text(
-                              '${dateDiff} ${unit} Ago',
-                              style: TextStyle(
+                              '$dateDiff $unit Ago',
+                              style: const TextStyle(
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.blue),
                             ),
                           ),
                           Visibility(
-                              visible: !data['read'] as bool,
-                              child: Icon(
+                              visible: !data['read'],
+                              child: const Icon(
                                 size: 12,
                                 Icons.circle,
                                 color: Colors.blueAccent,
@@ -328,7 +329,7 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
     late String notificationDate = "";
     if (data['date_sent'] != null) {
       DateTime date = (data['date_sent'] as Timestamp).toDate();
-      notificationDate = 'at ' + outputFormat.format(date);
+      notificationDate = 'at ${outputFormat.format(date)}';
     }
     SetNotificationRead(data);
     hasUnreadNotification = false;
@@ -337,35 +338,35 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
       child: SizedBox(
           width: MediaQuery.of(context).size.width / 2,
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Center(
                       child: Text("${data['title']}",
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 18))),
                   Center(
-                    child: Text("${data['sent_by']} ${notificationDate}"),
+                    child: Text("${data['sent_by']} $notificationDate"),
                   ),
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     height: MediaQuery.of(parentContext).size.height / 4,
                     width: MediaQuery.of(parentContext).size.width / 3,
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.grey)),
-                    margin: EdgeInsets.only(top: 20, left: 10, right: 10),
+                    margin: const EdgeInsets.only(top: 20, left: 10, right: 10),
                     child: Text("${data['body']}"),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 15),
+                    margin: const EdgeInsets.only(top: 15),
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: OutlinedButton(
                           onPressed: () {
                             Navigator.pop(parentContext);
                           },
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text('Ok'),
                           )),
@@ -383,7 +384,7 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
     switch (currentPage) {
       case "Home":
         {
-          return HomePage(title: 'Home');
+          return const HomePage(title: 'Home');
         }
       case "Covid-19 Cases":
         {
@@ -451,18 +452,18 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
   }
 
   Widget SendNotificationDialog(BuildContext context) {
-    TextEditingController titleController = new TextEditingController();
-    TextEditingController bodyController = new TextEditingController();
+    TextEditingController titleController = TextEditingController();
+    TextEditingController bodyController = TextEditingController();
     return Dialog(
       child: SizedBox(
           child: Container(
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         child: Column(
           children: [
             Center(
               child: Container(
-                margin: EdgeInsets.only(top: 15),
-                child: Text(
+                margin: const EdgeInsets.only(top: 15),
+                child: const Text(
                   "Send Notification",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
@@ -472,11 +473,11 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(child: Text("Title:")),
+                  const Flexible(child: Text("Title:")),
                   Flexible(
                       flex: 5,
                       child: Container(
-                          margin: EdgeInsets.only(left: 5),
+                          margin: const EdgeInsets.only(left: 5),
                           child: TextFormField(
                             controller: titleController,
                           )))
@@ -484,16 +485,16 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 15),
+              margin: const EdgeInsets.only(top: 15),
               child: Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(child: Text("Body:")),
+                    const Flexible(child: Text("Body:")),
                     Flexible(
                       flex: 5,
                       child: Container(
-                        margin: EdgeInsets.only(left: 5),
+                        margin: const EdgeInsets.only(left: 5),
                         child: TextFormField(
                           controller: bodyController,
                           minLines: 1,
@@ -506,7 +507,7 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(top: 20, right: 10),
+              margin: const EdgeInsets.only(top: 20, right: 10),
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: Row(
@@ -523,34 +524,35 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text("Notification Sent Successfully!"),
+                                title: const Text(
+                                    "Notification Sent Successfully!"),
                                 actions: [
                                   ElevatedButton(
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
-                                      child: Text("OK"))
+                                      child: const Text("OK"))
                                 ],
                               );
                             },
                           );
                         },
-                        child: Padding(
+                        child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Text("Send Notification"),
                         )),
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: const EdgeInsets.only(left: 10),
                       child: OutlinedButton(
                           onPressed: () {
-                            Navigator.of(context).push(new MaterialPageRoute(
+                            Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return new Home(
+                              return Home(
                                 current_page: current_page,
                               );
                             }));
                           },
-                          child: Padding(
+                          child: const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Text("Cancel"),
                           )),
@@ -577,10 +579,10 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
     var doc = FirebaseFirestore.instance.collection('UserAccounts');
 
     doc.snapshots().forEach((element) {
-      element.docs.forEach((e) {
+      for (var e in element.docs) {
         var notification = doc.doc(e.id).collection('Notification').doc();
         notification.set(notificationData);
-      });
+      }
     });
   }
 }
@@ -636,8 +638,8 @@ class _LeftDrawerState extends State<LeftDrawer> {
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -699,8 +701,10 @@ class _LeftDrawerState extends State<LeftDrawer> {
                 case "Logout":
                   {
                     FlutterSession().set("_id", "").whenComplete(() =>
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MyApp())));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyApp())));
                     break;
                   }
               }
@@ -709,7 +713,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
               setState(() => isHovering = hovering);
             },
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 100),
+              duration: const Duration(milliseconds: 100),
               curve: Curves.ease,
               padding: EdgeInsets.all(isHovering ? 15 : 14.5),
               decoration: BoxDecoration(
@@ -732,8 +736,10 @@ class _LeftDrawerState extends State<LeftDrawer> {
               case "Logout":
                 {
                   FlutterSession().set("_id", "").whenComplete(() =>
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MyApp())));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyApp())));
                   break;
                 }
             }

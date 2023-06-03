@@ -5,12 +5,11 @@ import 'package:flutter/services.dart';
 import 'package:infodash_app/home.dart';
 import 'package:infodash_app/infodashlib/Cases/CaseStatus.dart';
 import 'package:infodash_app/infodashlib/Cases/CasesInfoManager.dart';
-import 'package:infodash_app/pages/casespage.dart';
 
 class AddCase extends StatefulWidget {
   final Future<List<String>> baranggays;
   final VoidCallback notifyParent;
-  AddCase({super.key, required this.baranggays, required this.notifyParent});
+  const AddCase({super.key, required this.baranggays, required this.notifyParent});
   @override
   State<AddCase> createState() => _AddCaseState();
 }
@@ -56,7 +55,7 @@ class _AddCaseState extends State<AddCase> {
       alignment: Alignment.bottomRight,
       child: SizedBox(
         child: Container(
-          margin: EdgeInsets.only(right: 10),
+          margin: const EdgeInsets.only(right: 10),
           child: OutlinedButton.icon(
             onPressed: () {
               showDialog(
@@ -66,12 +65,12 @@ class _AddCaseState extends State<AddCase> {
                     return AddCaseDialog(context);
                   });
             },
-            icon: Icon(
+            icon: const Icon(
               // <-- Icon
               Icons.add_box_rounded,
               size: 24.0,
             ),
-            label: Padding(
+            label: const Padding(
               padding: EdgeInsets.all(12.0),
               child: Text('Add New Case'),
             ), // <-- Text
@@ -93,7 +92,7 @@ class _AddCaseState extends State<AddCase> {
             width: MediaQuery.of(context).size.width / 2,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.fromLTRB(15, 10, 0, 0),
+                padding: const EdgeInsets.fromLTRB(15, 10, 0, 0),
                 alignment: Alignment.center,
                 child: Center(
                   child: Column(
@@ -101,7 +100,7 @@ class _AddCaseState extends State<AddCase> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Center(
+                        const Center(
                           child: Text(
                             "Add New Case",
                             style: TextStyle(
@@ -112,7 +111,7 @@ class _AddCaseState extends State<AddCase> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                           child: Flex(
                               direction: Axis.horizontal,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -120,8 +119,8 @@ class _AddCaseState extends State<AddCase> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  child: Text(
+                                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: const Text(
                                     "Subdivision :",
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -134,7 +133,7 @@ class _AddCaseState extends State<AddCase> {
                                 Expanded(child: BaranggayList(baranggays)),
                                 IconButton(
                                   tooltip: "Add New Subdivision",
-                                  icon: Icon(Icons.add_circle),
+                                  icon: const Icon(Icons.add_circle),
                                   onPressed: (() {
                                     showDialog(
                                         context: parent,
@@ -155,15 +154,15 @@ class _AddCaseState extends State<AddCase> {
                                                         .width /
                                                     2,
                                                 child: Container(
-                                                    margin: EdgeInsets.only(
+                                                    margin: const EdgeInsets.only(
                                                         left: 10, right: 10),
                                                     child: Container(
-                                                      margin: EdgeInsets.all(8),
+                                                      margin: const EdgeInsets.all(8),
                                                       child:
                                                           SingleChildScrollView(
                                                         child: Column(
                                                           children: [
-                                                            Text(
+                                                            const Text(
                                                               "Enter New Subdivision",
                                                               style: TextStyle(
                                                                   fontSize:
@@ -209,7 +208,7 @@ class _AddCaseState extends State<AddCase> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                decoration: InputDecoration(
+                                                                decoration: const InputDecoration(
                                                                     hintText:
                                                                         "ENTER SUBDIVISION NAME",
                                                                     labelText:
@@ -239,7 +238,7 @@ class _AddCaseState extends State<AddCase> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                decoration: InputDecoration(
+                                                                decoration: const InputDecoration(
                                                                     hintText:
                                                                         "ENTER ACTIVE CASE INITIAL VALUE",
                                                                     labelText:
@@ -269,7 +268,7 @@ class _AddCaseState extends State<AddCase> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                decoration: InputDecoration(
+                                                                decoration: const InputDecoration(
                                                                     hintText:
                                                                         "ENTER SUSPECTED CASE INITIAL VALUE",
                                                                     labelText:
@@ -299,7 +298,7 @@ class _AddCaseState extends State<AddCase> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                decoration: InputDecoration(
+                                                                decoration: const InputDecoration(
                                                                     hintText:
                                                                         "ENTER RECOVERY CASE INITIAL VALUE",
                                                                     labelText:
@@ -329,7 +328,7 @@ class _AddCaseState extends State<AddCase> {
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
-                                                                decoration: InputDecoration(
+                                                                decoration: const InputDecoration(
                                                                     hintText:
                                                                         "ENTER DEATH CASE INITIAL VALUE",
                                                                     labelText:
@@ -340,7 +339,7 @@ class _AddCaseState extends State<AddCase> {
                                                               ),
                                                             ),
                                                             Container(
-                                                              margin: EdgeInsets
+                                                              margin: const EdgeInsets
                                                                   .only(
                                                                       top: 20),
                                                               child: Flex(
@@ -385,13 +384,13 @@ class _AddCaseState extends State<AddCase> {
                                                                             builder:
                                                                                 (context) {
                                                                               return AlertDialog(
-                                                                                title: Text("Saved Successfully!"),
+                                                                                title: const Text("Saved Successfully!"),
                                                                                 actions: [
                                                                                   ElevatedButton(
                                                                                       onPressed: () {
                                                                                         Navigator.pop(context);
                                                                                       },
-                                                                                      child: Text("OK"))
+                                                                                      child: const Text("OK"))
                                                                                 ],
                                                                               );
                                                                             },
@@ -405,14 +404,14 @@ class _AddCaseState extends State<AddCase> {
                                                                         }
                                                                       },
                                                                       child:
-                                                                          Padding(
+                                                                          const Padding(
                                                                         padding:
                                                                             EdgeInsets.all(8.0),
                                                                         child: Text(
                                                                             "Add"),
                                                                       )),
                                                                   Container(
-                                                                    margin: EdgeInsets.only(
+                                                                    margin: const EdgeInsets.only(
                                                                         left:
                                                                             10,
                                                                         right:
@@ -431,7 +430,7 @@ class _AddCaseState extends State<AddCase> {
                                                                           Navigator.pop(
                                                                               dialogContext);
                                                                         },
-                                                                        child: Padding(
+                                                                        child: const Padding(
                                                                           padding:
                                                                               EdgeInsets.all(8.0),
                                                                           child:
@@ -449,12 +448,12 @@ class _AddCaseState extends State<AddCase> {
                                         });
                                   }),
                                   iconSize: 21.0,
-                                  color: Color(0xFF000000),
+                                  color: const Color(0xFF000000),
                                 )
                               ]),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 0, 25, 0),
+                          margin: const EdgeInsets.fromLTRB(15, 0, 25, 0),
                           child: Flex(
                               direction: Axis.horizontal,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -462,8 +461,8 @@ class _AddCaseState extends State<AddCase> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(10, 0, 5, 0),
-                                  child: Text(
+                                  margin: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                  child: const Text(
                                     "Status: ",
                                     textAlign: TextAlign.right,
                                     style: TextStyle(
@@ -476,7 +475,7 @@ class _AddCaseState extends State<AddCase> {
                                 Expanded(
                                   child: DropdownButtonFormField(
                                       isExpanded: true,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 17.0,
                                           color: Color(0xFF202020),
                                           fontWeight: FontWeight.w200,
@@ -504,7 +503,7 @@ class _AddCaseState extends State<AddCase> {
                               ]),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(15, 0, 25, 0),
+                          margin: const EdgeInsets.fromLTRB(15, 0, 25, 0),
                           child: TextFormField(
                             inputFormatters: <TextInputFormatter>[
                               FilteringTextInputFormatter.allow(
@@ -512,7 +511,7 @@ class _AddCaseState extends State<AddCase> {
                             ],
                             controller: CaseCountController,
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER NEW CASE COUNT",
                                 labelText: "NEW CASE COUNT",
                                 floatingLabelBehavior:
@@ -520,7 +519,7 @@ class _AddCaseState extends State<AddCase> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(10, 20, 5, 0),
+                          margin: const EdgeInsets.fromLTRB(10, 20, 5, 0),
                           child: SizedBox(
                             child: Flex(
                               direction: Axis.horizontal,
@@ -546,24 +545,24 @@ class _AddCaseState extends State<AddCase> {
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                            title: Text("Saved Successfully!"),
+                                            title: const Text("Saved Successfully!"),
                                             actions: [
                                               ElevatedButton(
                                                   onPressed: () {
                                                     Navigator.pop(context);
                                                   },
-                                                  child: Text("OK"))
+                                                  child: const Text("OK"))
                                             ],
                                           );
                                         },
                                       );
                                     },
-                                    child: Padding(
+                                    child: const Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text("Add"),
                                     )),
                                 Container(
-                                  margin: EdgeInsets.only(left: 10, right: 10),
+                                  margin: const EdgeInsets.only(left: 10, right: 10),
                                   child: ElevatedButton(
                                       style: ButtonStyle(backgroundColor:
                                           MaterialStateProperty.resolveWith(
@@ -582,7 +581,7 @@ class _AddCaseState extends State<AddCase> {
                                       onPressed: () {
                                         Navigator.pop(parent);
                                       },
-                                      child: Padding(
+                                      child: const Padding(
                                         padding: EdgeInsets.all(8.0),
                                         child: Text("Cancel"),
                                       )),
@@ -608,7 +607,7 @@ class _AddCaseState extends State<AddCase> {
               return Container(
                 child: DropdownButtonFormField(
                     isExpanded: true,
-                    style: new TextStyle(
+                    style: const TextStyle(
                         fontSize: 17.0,
                         color: Color(0xFF202020),
                         fontWeight: FontWeight.w200,
@@ -632,11 +631,11 @@ class _AddCaseState extends State<AddCase> {
                     }),
               );
             } else if (snapshot.hasError) {
-              return Text("Add New Subdivision");
+              return const Text("Add New Subdivision");
             }
           }
 
-          return LinearProgressIndicator(
+          return const LinearProgressIndicator(
             backgroundColor: Colors.redAccent,
             valueColor: AlwaysStoppedAnimation(Colors.green),
           );

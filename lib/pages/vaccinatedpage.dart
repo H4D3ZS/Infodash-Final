@@ -3,13 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:flutter_session/flutter_session.dart';
 
 class VaccinatedPage extends StatefulWidget {
-  VaccinatedPage({super.key, required this.title});
+  const VaccinatedPage({super.key, required this.title});
   final String title;
   @override
   State<VaccinatedPage> createState() => _VaccinatedPageState(title);
@@ -56,12 +55,12 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                     ),
                     child: Container(
                       color: Colors.white,
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       child: Row(
                         children: [
                           Text(
                             title,
-                            style: TextStyle(color: Colors.black),
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ],
                       ),
@@ -69,11 +68,11 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                   ),
                   Container(
                     // height: MediaQuery.of(context).size.height/2,
-                    margin: EdgeInsets.only(top: 20, bottom: 20),
+                    margin: const EdgeInsets.only(top: 20, bottom: 20),
                     child: Card(
                       elevation: 6,
                       child: Column(children: [
-                        Text(
+                        const Text(
                           "NUMBER VACCINES ADMINISTERED CATALUNAN GRANDE",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 20),
@@ -86,9 +85,9 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                                 vaccineData = data;
                                 return Center(child: VaccineChart(data));
                               } else if (snapshot.hasError) {
-                                return Text("Error Retreiving Vaccine Data");
+                                return const Text("Error Retreiving Vaccine Data");
                               }
-                              return CircularProgressIndicator(
+                              return const CircularProgressIndicator(
                                 backgroundColor: Colors.redAccent,
                                 valueColor:
                                     AlwaysStoppedAnimation(Colors.green),
@@ -99,13 +98,13 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                           visible: snapshot.data,
                           child: Center(
                             child: Container(
-                              margin: EdgeInsets.all(10),
+                              margin: const EdgeInsets.all(10),
                               child: ElevatedButton.icon(
                                   onPressed: () {
                                     UpdateVaccineData(context, vaccineData);
                                   },
-                                  icon: Icon(Icons.edit),
-                                  label: Text("Update Vaccine Data")),
+                                  icon: const Icon(Icons.edit),
+                                  label: const Text("Update Vaccine Data")),
                             ),
                           ),
                         )
@@ -120,7 +119,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
             ),
           );
         } else {
-          return Text("Loading");
+          return const Text("Loading");
         }
       },
     );
@@ -144,7 +143,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
           child: Visibility(
             visible: isUserAdmin,
             child: Container(
-              margin: EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 10),
               child: OutlinedButton.icon(
                 onPressed: () {
                   showDialog(
@@ -154,12 +153,12 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                         return UpdateRecord(dialogContext);
                       });
                 },
-                icon: Icon(
+                icon: const Icon(
                   // <-- Icon
                   Icons.add_box_rounded,
                   size: 24.0,
                 ),
-                label: Padding(
+                label: const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text('Update Record'),
                 ), // <-- Text
@@ -177,7 +176,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
         stream: readVaccinated(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return Text("Error Getting Data");
+            return const Text("Error Getting Data");
           } else if (snapshot.hasData) {
             var data = snapshot.data!;
             firstDose = data['first_dose'];
@@ -194,12 +193,12 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
             return SizedBox(
               width: MediaQuery.of(context).size.width / 2,
               child: Container(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   child: Center(
                       child: Column(//direction: Axis.vertical,
                           // ignore: prefer__literals_to_create_immutables
                           children: [
-                    Text(
+                    const Text(
                       "NUMBER OF VACCINATED PERSON IN CATALUNAN GRANDE",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
@@ -213,7 +212,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                                child: Center(
+                                child: const Center(
                               child: Text("FIRST DOSE"),
                             )),
                             Container(
@@ -224,7 +223,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                                child: Center(
+                                child: const Center(
                               child: Text("SECOND DOSE"),
                             )),
                             Container(
@@ -235,7 +234,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                                child: Center(
+                                child: const Center(
                               child: Text("FIRST BOOSTER"),
                             )),
                             Container(
@@ -246,7 +245,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                                child: Center(
+                                child: const Center(
                               child: Text("SECOND BOOSTER"),
                             )),
                             Container(
@@ -257,7 +256,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                         TableRow(
                           children: <Widget>[
                             Container(
-                                child: Center(
+                                child: const Center(
                               child: Text("TOTAL VACCINATED"),
                             )),
                             Container(
@@ -270,7 +269,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                   ]))),
             );
           } else {
-            return CircularProgressIndicator(
+            return const CircularProgressIndicator(
               backgroundColor: Colors.redAccent,
               valueColor: AlwaysStoppedAnimation(Colors.green),
               strokeWidth: 10,
@@ -294,11 +293,11 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
             width: MediaQuery.of(context).size.width / 2,
             child: SingleChildScrollView(
                 child: Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.all(20),
                     child: Column(children: [
                       Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        child: Text(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: const Text(
                           "UPDATE VACCINATED RECORD",
                           style: TextStyle(fontWeight: FontWeight.w600),
                         ),
@@ -310,7 +309,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "ENTER FIRST DOSE RECORD",
                             labelText: "FIRST DOSE",
                             floatingLabelBehavior:
@@ -323,7 +322,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "ENTER SECOND DOSE RECORD",
                             labelText: "SECOND DOSE",
                             floatingLabelBehavior:
@@ -336,7 +335,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "ENTER FIRST BOOSTER RECORD",
                             labelText: "FIRST BOOSTER",
                             floatingLabelBehavior:
@@ -349,7 +348,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         textAlign: TextAlign.center,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             hintText: "ENTER SECOND BOOSTER RECORD",
                             labelText: "SECOND BOOSTER",
                             floatingLabelBehavior:
@@ -369,7 +368,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                                     builder: (context) {
                                       return SizedBox(
                                           child: AlertDialog(
-                                        title: Text("Save Changes?"),
+                                        title: const Text("Save Changes?"),
                                         actionsAlignment: MainAxisAlignment.end,
                                         actions: [
                                           ElevatedButton.icon(
@@ -377,31 +376,31 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                                                 SaveUpdatedRecord();
                                                 Navigator.pop(parent);
                                               },
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.play_arrow,
                                                 color: Colors.green,
                                               ),
-                                              label: Text("Publish")),
+                                              label: const Text("Publish")),
                                           ElevatedButton.icon(
                                               onPressed: () {
                                                 Navigator.pop(parent);
                                               },
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.cancel,
                                                 color: Colors.red,
                                               ),
-                                              label: Text("Cancel"))
+                                              label: const Text("Cancel"))
                                         ],
                                       ));
                                     },
                                   );
                                 },
-                                child: Text("Save")),
+                                child: const Text("Save")),
                             OutlinedButton(
                                 onPressed: () {
                                   Navigator.pop(parent);
                                 },
-                                child: Text("Cancel"))
+                                child: const Text("Cancel"))
                           ],
                         ),
                       )
@@ -421,10 +420,10 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
     };
     return Center(
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: PieChart(
           dataMap: chartValue,
-          animationDuration: Duration(milliseconds: 800),
+          animationDuration: const Duration(milliseconds: 800),
           chartLegendSpacing: 20,
           chartRadius: MediaQuery.of(context).size.width / 8,
           // colorList: colorList,
@@ -432,7 +431,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
           chartType: ChartType.ring,
           ringStrokeWidth: 30,
           centerText: "VACCINES",
-          legendOptions: LegendOptions(
+          legendOptions: const LegendOptions(
             showLegendsInRow: false,
             legendPosition: LegendPosition.right,
             showLegends: true,
@@ -441,7 +440,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
               fontWeight: FontWeight.normal,
             ),
           ),
-          chartValuesOptions: ChartValuesOptions(
+          chartValuesOptions: const ChartValuesOptions(
             showChartValueBackground: true,
             showChartValues: true,
             showChartValuesInPercentage: true,
@@ -481,16 +480,16 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                 // height: MediaQuery.of(parent).size.height / 1.5,
                 width: MediaQuery.of(parent).size.width / 2,
                 child: Container(
-                  padding: EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   child: SingleChildScrollView(
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                              margin: EdgeInsets.only(top: 5, bottom: 10),
+                              margin: const EdgeInsets.only(top: 5, bottom: 10),
                               child:
-                                  Text("UPDATE ADMINISTERED VACCINE RECORD")),
+                                  const Text("UPDATE ADMINISTERED VACCINE RECORD")),
                           TextFormField(
                             controller: pfizerController,
                             keyboardType: TextInputType.number,
@@ -498,7 +497,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER PFIZER ADMINISTERED",
                                 labelText: "PFIZER",
                                 floatingLabelBehavior:
@@ -511,7 +510,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER ASTRAZENECA ADMINISTERED",
                                 labelText: "ASTRAZENECA",
                                 floatingLabelBehavior:
@@ -524,7 +523,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER COVAVAX ADMINISTERED",
                                 labelText: "COVAVAX",
                                 floatingLabelBehavior:
@@ -537,7 +536,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER COVAXIN ADMINISTERED",
                                 labelText: "COVAXIN",
                                 floatingLabelBehavior:
@@ -550,7 +549,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER JANSEN ADMINISTERED",
                                 labelText: "JANSEN",
                                 floatingLabelBehavior:
@@ -563,7 +562,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER MODERNA ADMINISTERED",
                                 labelText: "MODERNA",
                                 floatingLabelBehavior:
@@ -576,7 +575,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER SINOVAC ADMINISTERED",
                                 labelText: "SINOVAC",
                                 floatingLabelBehavior:
@@ -589,14 +588,14 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                               FilteringTextInputFormatter.digitsOnly
                             ],
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "ENTER SPUTNIK ADMINISTERED",
                                 labelText: "SPUTNIK",
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 20),
+                            margin: const EdgeInsets.only(top: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -625,7 +624,7 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                                         builder: (dlgContext) {
                                           return SizedBox(
                                               child: AlertDialog(
-                                            title: Text("Save Changes?"),
+                                            title: const Text("Save Changes?"),
                                             actionsAlignment:
                                                 MainAxisAlignment.end,
                                             actions: [
@@ -636,32 +635,32 @@ class _VaccinatedPageState extends State<VaccinatedPage> {
                                                     Navigator.pop(
                                                         dialogContext);
                                                   },
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.play_arrow,
                                                     color: Colors.green,
                                                   ),
-                                                  label: Text("Publish")),
+                                                  label: const Text("Publish")),
                                               ElevatedButton.icon(
                                                   onPressed: () {
                                                     Navigator.pop(
                                                         dialogContext);
                                                   },
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.cancel,
                                                     color: Colors.red,
                                                   ),
-                                                  label: Text("Cancel"))
+                                                  label: const Text("Cancel"))
                                             ],
                                           ));
                                         },
                                       );
                                     },
-                                    child: Text("Save")),
+                                    child: const Text("Save")),
                                 OutlinedButton(
                                     onPressed: () {
                                       Navigator.pop(dialogContext);
                                     },
-                                    child: Text("Cancel"))
+                                    child: const Text("Cancel"))
                               ],
                             ),
                           )

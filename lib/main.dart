@@ -14,11 +14,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -29,13 +29,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MainPage(),
+      home: const MainPage(),
     );
   }
 }
 
 class MainPage extends StatelessWidget {
-  MainPage({super.key});
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) => FutureBuilder(
@@ -62,7 +62,7 @@ class MainPage extends StatelessWidget {
           current_page: '',
         );
       } else {
-        return LoginPage();
+        return const LoginPage();
       }
     });
   }

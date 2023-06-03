@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class YearlyCase extends StatefulWidget {
-  YearlyCase({super.key, required this.isAdmin});
+  const YearlyCase({super.key, required this.isAdmin});
   final bool isAdmin;
   @override
   State<YearlyCase> createState() => _YearlyCase(isAdmin);
@@ -21,8 +18,8 @@ class _YearlyCase extends State<YearlyCase> {
     _trackballBehavior = TrackballBehavior(
         // Enables the trackball
         enable: true,
-        tooltipSettings: InteractiveTooltip(
-            enable: true, color: Colors.red, format: '\point.y Cases'),
+        tooltipSettings: const InteractiveTooltip(
+            enable: true, color: Colors.red, format: 'point.y Cases'),
         lineWidth: 2,
         lineType: TrackballLineType.horizontal,
         activationMode: ActivationMode.singleTap,
@@ -39,8 +36,8 @@ class _YearlyCase extends State<YearlyCase> {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.only(top: 20),
-            child: Text("Yearly Cases"),
+            margin: const EdgeInsets.only(top: 20),
+            child: const Text("Yearly Cases"),
           ),
         ),
         StreamBuilder<List<SalesData>>(
@@ -57,15 +54,15 @@ class _YearlyCase extends State<YearlyCase> {
                       child: Visibility(
                         visible: isAdmin,
                         child: ElevatedButton(
-                          child: Text("Update Yearly Cases Data"),
+                          child: const Text("Update Yearly Cases Data"),
                           onPressed: () {
                             String selectedYear = data.last.year;
                             String count = data.last.sales.toString();
                             List<SalesData> list = data;
                             TextEditingController countValue =
-                                new TextEditingController(text: count);
+                                TextEditingController(text: count);
                             TextEditingController yearValue =
-                                new TextEditingController();
+                                TextEditingController();
                             showDialog(
                               context: context,
                               builder: (dlgcontext) {
@@ -80,20 +77,20 @@ class _YearlyCase extends State<YearlyCase> {
                                             MediaQuery.of(context).size.width /
                                                 3,
                                         child: Container(
-                                          margin: EdgeInsets.only(
+                                          margin: const EdgeInsets.only(
                                               top: 20, bottom: 5),
                                           child: Center(
                                             child: Column(
                                               children: [
-                                                Text("Update Yearly Data"),
+                                                const Text("Update Yearly Data"),
                                                 Container(
                                                   child: DropdownButton<String>(
                                                     value: selectedYear,
                                                     items: list.map((e) {
                                                       return DropdownMenuItem<
                                                               String>(
-                                                          child: Text(e.year),
-                                                          value: e.year);
+                                                          value: e.year,
+                                                          child: Text(e.year));
                                                     }).toList(),
                                                     onChanged: (value) {
                                                       setState(() {
@@ -123,7 +120,7 @@ class _YearlyCase extends State<YearlyCase> {
                                                 ),
                                                 Center(
                                                   child: Container(
-                                                    margin: EdgeInsets.only(
+                                                    margin: const EdgeInsets.only(
                                                         top: 20),
                                                     child: Row(
                                                       crossAxisAlignment:
@@ -135,7 +132,7 @@ class _YearlyCase extends State<YearlyCase> {
                                                       children: [
                                                         Container(
                                                           margin:
-                                                              EdgeInsets.only(
+                                                              const EdgeInsets.only(
                                                                   right: 5),
                                                           child: ElevatedButton(
                                                               onPressed: () {
@@ -157,29 +154,29 @@ class _YearlyCase extends State<YearlyCase> {
                                                                             Column(
                                                                           children: [
                                                                             Container(
-                                                                              margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-                                                                              child: TextFormField(controller: yearValue, decoration: InputDecoration(labelText: "Enter Year")),
+                                                                              margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                                                                              child: TextFormField(controller: yearValue, decoration: const InputDecoration(labelText: "Enter Year")),
                                                                             ),
                                                                             Container(
-                                                                              margin: EdgeInsets.only(top: 20),
+                                                                              margin: const EdgeInsets.only(top: 20),
                                                                               child: Row(
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 children: [
                                                                                   Container(
-                                                                                    margin: EdgeInsets.only(right: 5),
+                                                                                    margin: const EdgeInsets.only(right: 5),
                                                                                     child: ElevatedButton(
                                                                                         onPressed: () {
                                                                                           CreateYearlyCases(year: yearValue.text);
                                                                                           setState(() => list.add(SalesData(yearValue.text, 0)));
                                                                                           Navigator.pop(dlgcontext);
                                                                                         },
-                                                                                        child: Text("Save")),
+                                                                                        child: const Text("Save")),
                                                                                   ),
                                                                                   ElevatedButton(
                                                                                       onPressed: () {
                                                                                         Navigator.pop(subcontext);
                                                                                       },
-                                                                                      child: Text("Cancel"))
+                                                                                      child: const Text("Cancel"))
                                                                                 ],
                                                                               ),
                                                                             )
@@ -190,12 +187,12 @@ class _YearlyCase extends State<YearlyCase> {
                                                                   },
                                                                 );
                                                               },
-                                                              child: Text(
+                                                              child: const Text(
                                                                   "Add Year")),
                                                         ),
                                                         Container(
                                                           margin:
-                                                              EdgeInsets.only(
+                                                              const EdgeInsets.only(
                                                                   right: 5),
                                                           child: ElevatedButton(
                                                               onPressed: () {
@@ -210,7 +207,7 @@ class _YearlyCase extends State<YearlyCase> {
                                                                     dlgcontext);
                                                               },
                                                               child:
-                                                                  Text("Save")),
+                                                                  const Text("Save")),
                                                         ),
                                                         ElevatedButton(
                                                             onPressed: () {
@@ -218,7 +215,7 @@ class _YearlyCase extends State<YearlyCase> {
                                                                   dlgcontext);
                                                             },
                                                             child:
-                                                                Text("Cancel")),
+                                                                const Text("Cancel")),
                                                       ],
                                                     ),
                                                   ),
@@ -253,7 +250,7 @@ class _YearlyCase extends State<YearlyCase> {
               } else if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               } else {
-                return CircularProgressIndicator(
+                return const CircularProgressIndicator(
                   backgroundColor: Colors.redAccent,
                   valueColor: AlwaysStoppedAnimation(Colors.green),
                   strokeWidth: 10,
@@ -287,7 +284,7 @@ Future UpdateYearlyCases({required id, dynamic data}) async {
   await hub.set(data, SetOptions(merge: true));
 }
 
-final collectionPath = 'YearlyCases';
+const collectionPath = 'YearlyCases';
 Stream<List<SalesData>> GetYearlyCases() {
   return FirebaseFirestore.instance.collection(collectionPath).snapshots().map(
       (event) => event.docs.map((e) => SalesData.fromJson(e.data())).toList());

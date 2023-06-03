@@ -14,7 +14,7 @@ import 'package:pie_chart/pie_chart.dart';
 import 'casespage/yearlyCaseWidget.dart';
 
 class CasesPage extends StatefulWidget {
-  CasesPage({super.key, required this.title});
+  const CasesPage({super.key, required this.title});
   final String title;
   @override
   State<CasesPage> createState() => _CasesPageState(title);
@@ -69,7 +69,7 @@ class _CasesPageState extends State<CasesPage> {
     });
   }
 
-  ScrollController horizontalScroll = new ScrollController();
+  ScrollController horizontalScroll = ScrollController();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -85,12 +85,12 @@ class _CasesPageState extends State<CasesPage> {
               ),
               child: Container(
                 color: Colors.white,
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: Row(
                   children: [
                     Text(
                       title,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
@@ -109,7 +109,7 @@ class _CasesPageState extends State<CasesPage> {
             //       )),
             // ),
             Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: const EdgeInsets.only(top: 20),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height - 200,
                 child: SingleChildScrollView(
@@ -119,16 +119,16 @@ class _CasesPageState extends State<CasesPage> {
                         var year = DateTime.now().year;
                         if (snapshot.hasData) {
                           Map<String, double> chartValue = {};
-                          snapshot.data!.forEach((element) {
+                          for (var element in snapshot.data!) {
                             chartValue.addAll({
                               element.BaranggayName:
                                   element.TotalCount.toDouble()
                             });
-                          });
+                          }
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Text(
+                              const Text(
                                 'Total Number of Covid-19 Cases in Catalunan Grande',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 30),
@@ -137,18 +137,18 @@ class _CasesPageState extends State<CasesPage> {
                                 isAdmin: isUserAdmin,
                               ),
                               Container(
-                                margin: EdgeInsets.only(top: 20, bottom: 40),
-                                child: Text('All-Time Detailed Cases'),
+                                margin: const EdgeInsets.only(top: 20, bottom: 40),
+                                child: const Text('All-Time Detailed Cases'),
                               ),
                               SizedBox(
                                 child: SingleChildScrollView(
                                   child: Center(
                                     child: Container(
-                                      margin: EdgeInsets.only(top: 5),
+                                      margin: const EdgeInsets.only(top: 5),
                                       child: PieChart(
                                         dataMap: chartValue,
                                         animationDuration:
-                                            Duration(milliseconds: 800),
+                                            const Duration(milliseconds: 800),
                                         chartLegendSpacing: 20,
                                         chartRadius: 400,
                                         // colorList: colorList,
@@ -156,7 +156,7 @@ class _CasesPageState extends State<CasesPage> {
                                         chartType: ChartType.disc,
                                         ringStrokeWidth: 30,
                                         centerText: "COVID CASES",
-                                        legendOptions: LegendOptions(
+                                        legendOptions: const LegendOptions(
                                           showLegendsInRow: false,
                                           legendPosition: LegendPosition.bottom,
                                           showLegends: true,
@@ -166,7 +166,7 @@ class _CasesPageState extends State<CasesPage> {
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
-                                        chartValuesOptions: ChartValuesOptions(
+                                        chartValuesOptions: const ChartValuesOptions(
                                           showChartValueBackground: true,
                                           showChartValues: true,
                                           showChartValuesInPercentage: false,
@@ -182,14 +182,14 @@ class _CasesPageState extends State<CasesPage> {
                               ),
                               Container(
                                 child: Scrollbar(
-                                  isAlwaysShown: true,
+                                  thumbVisibility: true,
                                   controller: horizontalScroll,
                                   child: SingleChildScrollView(
                                     controller: horizontalScroll,
                                     scrollDirection: Axis.horizontal,
                                     child: DataTable(
                                         columns: <DataColumn>[
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Marking',
@@ -199,7 +199,7 @@ class _CasesPageState extends State<CasesPage> {
                                               ),
                                             ),
                                           ),
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Subdivision',
@@ -209,7 +209,7 @@ class _CasesPageState extends State<CasesPage> {
                                               ),
                                             ),
                                           ),
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Active',
@@ -219,7 +219,7 @@ class _CasesPageState extends State<CasesPage> {
                                               ),
                                             ),
                                           ),
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Suspected',
@@ -229,7 +229,7 @@ class _CasesPageState extends State<CasesPage> {
                                               ),
                                             ),
                                           ),
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Recovery',
@@ -239,7 +239,7 @@ class _CasesPageState extends State<CasesPage> {
                                               ),
                                             ),
                                           ),
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Death',
@@ -249,7 +249,7 @@ class _CasesPageState extends State<CasesPage> {
                                               ),
                                             ),
                                           ),
-                                          DataColumn(
+                                          const DataColumn(
                                             label: Expanded(
                                               child: Text(
                                                 'Total',
@@ -262,7 +262,7 @@ class _CasesPageState extends State<CasesPage> {
                                           DataColumn(
                                             label: Visibility(
                                               visible: isUserAdmin,
-                                              child: Expanded(
+                                              child: const Expanded(
                                                 child: Text(
                                                   'Options',
                                                   style: TextStyle(
@@ -306,7 +306,7 @@ class _CasesPageState extends State<CasesPage> {
                                               richMessage: TextSpan(
                                                   text:
                                                       "Initial Active Case : ${e.ActiveCaseCount} ",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   children: [
@@ -321,7 +321,7 @@ class _CasesPageState extends State<CasesPage> {
                                               richMessage: TextSpan(
                                                   text:
                                                       "Initial Suspected Case : ${e.SuspectedCaseCount} ",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   children: [
@@ -336,7 +336,7 @@ class _CasesPageState extends State<CasesPage> {
                                               richMessage: TextSpan(
                                                   text:
                                                       "Initial Recovery Case : ${e.RecoveryCount} ",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   children: [
@@ -351,7 +351,7 @@ class _CasesPageState extends State<CasesPage> {
                                               richMessage: TextSpan(
                                                   text:
                                                       "Initial Death Case : ${e.DeathCount} ",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold),
                                                   children: [
@@ -432,11 +432,11 @@ class _CasesPageState extends State<CasesPage> {
                             ],
                           );
                         } else if (snapshot.hasError) {
-                          return Text('Error Loading Data');
+                          return const Text('Error Loading Data');
                         }
 
                         // By default, show a loading spinner.
-                        return CircularProgressIndicator(
+                        return const CircularProgressIndicator(
                           backgroundColor: Colors.redAccent,
                           valueColor: AlwaysStoppedAnimation(Colors.green),
                           strokeWidth: 10,
@@ -507,17 +507,17 @@ class _CasesPageState extends State<CasesPage> {
           height: MediaQuery.of(context).size.height / 1.5,
           // width: MediaQuery.of(context).size.width,
           child: Container(
-              margin: EdgeInsets.only(left: 10, right: 10),
+              margin: const EdgeInsets.only(left: 10, right: 10),
               child: Container(
-                margin: EdgeInsets.all(8),
+                margin: const EdgeInsets.all(8),
                 child: Flex(
                   direction: Axis.vertical,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: 10, bottom: 15),
+                      margin: const EdgeInsets.only(top: 10, bottom: 15),
                       child: Text(
                         "MODIFY ${data.BaranggayName.toUpperCase()}",
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 26.0,
                             color: Color(0xFF000000),
                             fontWeight: FontWeight.w400,
@@ -534,7 +534,7 @@ class _CasesPageState extends State<CasesPage> {
                                   (int.parse(initialActiveController.text) - 1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove,
                               color: Colors.red,
                             ),
@@ -548,7 +548,7 @@ class _CasesPageState extends State<CasesPage> {
                               ],
                               controller: initialActiveController,
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText: "ENTER ACTIVE CASE INITIAL VALUE",
                                   labelText: "ACTIVE CASE",
                                   floatingLabelBehavior:
@@ -561,7 +561,7 @@ class _CasesPageState extends State<CasesPage> {
                                   (int.parse(initialActiveController.text) + 1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add,
                               color: Colors.green,
                             ),
@@ -580,7 +580,7 @@ class _CasesPageState extends State<CasesPage> {
                                           1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove,
                               color: Colors.red,
                             ),
@@ -594,7 +594,7 @@ class _CasesPageState extends State<CasesPage> {
                               ],
                               controller: initialSuspectedController,
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText:
                                       "ENTER SUSPECTED CASE INITIAL VALUE",
                                   labelText: "SUSPECTED CASE",
@@ -609,7 +609,7 @@ class _CasesPageState extends State<CasesPage> {
                                           1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add,
                               color: Colors.green,
                             ),
@@ -628,7 +628,7 @@ class _CasesPageState extends State<CasesPage> {
                                           1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove,
                               color: Colors.red,
                             ),
@@ -642,7 +642,7 @@ class _CasesPageState extends State<CasesPage> {
                               ],
                               controller: initialRecoveryController,
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText: "ENTER RECOVERY CASE INITIAL VALUE",
                                   labelText: "RECOVERY CASE",
                                   floatingLabelBehavior:
@@ -656,7 +656,7 @@ class _CasesPageState extends State<CasesPage> {
                                           1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add,
                               color: Colors.green,
                             ),
@@ -674,7 +674,7 @@ class _CasesPageState extends State<CasesPage> {
                                   (int.parse(initialDeathController.text) - 1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.remove,
                               color: Colors.red,
                             ),
@@ -688,7 +688,7 @@ class _CasesPageState extends State<CasesPage> {
                               ],
                               controller: initialDeathController,
                               textAlign: TextAlign.center,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText: "ENTER DEATH CASE INITIAL VALUE",
                                   labelText: "DEATH CASE",
                                   floatingLabelBehavior:
@@ -701,7 +701,7 @@ class _CasesPageState extends State<CasesPage> {
                                   (int.parse(initialDeathController.text) + 1)
                                       .toString();
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.add,
                               color: Colors.green,
                             ),
@@ -747,7 +747,7 @@ class _CasesPageState extends State<CasesPage> {
                     //       },
                     //     )),
                     Container(
-                      margin: EdgeInsets.only(top: 20),
+                      margin: const EdgeInsets.only(top: 20),
                       child: Flex(
                         direction: Axis.horizontal,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -785,7 +785,7 @@ class _CasesPageState extends State<CasesPage> {
                                   builder: (context) {
                                     return SizedBox(
                                         child: AlertDialog(
-                                      title: Text("Save Changes?"),
+                                      title: const Text("Save Changes?"),
                                       actionsAlignment: MainAxisAlignment.end,
                                       actions: [
                                         ElevatedButton.icon(
@@ -796,9 +796,9 @@ class _CasesPageState extends State<CasesPage> {
                                                       newData);
 
                                               Navigator.of(context).push(
-                                                  new MaterialPageRoute(builder:
+                                                  MaterialPageRoute(builder:
                                                       (BuildContext context) {
-                                                return new Home(
+                                                return Home(
                                                   current_page:
                                                       'Covid-19 Cases',
                                                 );
@@ -807,7 +807,7 @@ class _CasesPageState extends State<CasesPage> {
                                                 context: context,
                                                 builder: (context) {
                                                   return AlertDialog(
-                                                    title: Text(
+                                                    title: const Text(
                                                         "Saved Successfully!"),
                                                     actions: [
                                                       ElevatedButton(
@@ -815,37 +815,37 @@ class _CasesPageState extends State<CasesPage> {
                                                             Navigator.pop(
                                                                 context);
                                                           },
-                                                          child: Text("OK"))
+                                                          child: const Text("OK"))
                                                     ],
                                                   );
                                                 },
                                               );
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.play_arrow,
                                               color: Colors.green,
                                             ),
-                                            label: Text("Publish")),
+                                            label: const Text("Publish")),
                                         ElevatedButton.icon(
                                             onPressed: () {
                                               Navigator.pop(context);
                                             },
-                                            icon: Icon(
+                                            icon: const Icon(
                                               Icons.cancel,
                                               color: Colors.red,
                                             ),
-                                            label: Text("Cancel"))
+                                            label: const Text("Cancel"))
                                       ],
                                     ));
                                   },
                                 );
                               },
-                              child: Padding(
+                              child: const Padding(
                                 padding: EdgeInsets.all(8.0),
                                 child: Text("Update"),
                               )),
                           Container(
-                            margin: EdgeInsets.only(left: 10, right: 10),
+                            margin: const EdgeInsets.only(left: 10, right: 10),
                             child: ElevatedButton(
                                 style: ButtonStyle(backgroundColor:
                                     MaterialStateProperty.resolveWith((states) {
@@ -860,7 +860,7 @@ class _CasesPageState extends State<CasesPage> {
                                 onPressed: () {
                                   Navigator.pop(dialogContext);
                                 },
-                                child: Padding(
+                                child: const Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Text("Cancel"),
                                 )),
@@ -882,19 +882,19 @@ class _CasesPageState extends State<CasesPage> {
           if (snapshot.hasData) {
             var data = snapshot.data!;
             return Container(
-              margin: EdgeInsets.all(15),
+              margin: const EdgeInsets.all(15),
               child: SingleChildScrollView(
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                          margin: EdgeInsets.only(bottom: 20),
-                          child: Text("LOGS")),
+                          margin: const EdgeInsets.only(bottom: 20),
+                          child: const Text("LOGS")),
                       ...data.map((e) {
                         var dateLog = (e['date'] as Timestamp).toDate();
                         return Text(
-                          '${e['log']} - ${dateLog} ',
+                          '${e['log']} - $dateLog ',
                           textAlign: TextAlign.left,
                         );
                       }).toList()
@@ -902,7 +902,7 @@ class _CasesPageState extends State<CasesPage> {
               ),
             );
           } else {
-            return Text("Loading Log");
+            return const Text("Loading Log");
           }
         },
       ),

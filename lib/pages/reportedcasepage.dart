@@ -10,7 +10,7 @@ import 'package:infodash_app/infodashlib/Cases/CasesInfoManager.dart';
 import 'package:flutter_session/flutter_session.dart';
 
 class ReportedCasePage extends StatefulWidget {
-  ReportedCasePage({super.key, required this.title});
+  const ReportedCasePage({super.key, required this.title});
   final String title;
   @override
   State<ReportedCasePage> createState() => _ReportedCasePageState(title);
@@ -66,12 +66,12 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
               ),
               child: Container(
                 color: Colors.white,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 child: Row(
                   children: [
                     Text(
                       title,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ],
                 ),
@@ -109,8 +109,8 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                     //     data.add(element);
                     //   });
                     // });
-                    if (data.length <= 0) {
-                      return Text("No Record Found");
+                    if (data.isEmpty) {
+                      return const Text("No Record Found");
                     }
 
                     var finalData = data.map((e) {
@@ -168,9 +168,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Text("Error Getting Data");
+                    return const Text("Error Getting Data");
                   } else {
-                    return CircularProgressIndicator(
+                    return const CircularProgressIndicator(
                       backgroundColor: Colors.redAccent,
                       valueColor: AlwaysStoppedAnimation(Colors.green),
                       strokeWidth: 10,
@@ -185,12 +185,12 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                   return Visibility(
                     visible: snapshot.data as bool == false,
                     child: Container(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         child: Align(
                           alignment: Alignment.bottomRight,
                           child: SizedBox(
                             child: Container(
-                              margin: EdgeInsets.only(right: 10),
+                              margin: const EdgeInsets.only(right: 10),
                               child: OutlinedButton.icon(
                                 onPressed: () {
                                   showDialog(
@@ -200,12 +200,12 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                         return ReportNewCaseDialog(mainContext);
                                       });
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   // <-- Icon
                                   Icons.add_box_rounded,
                                   size: 24.0,
                                 ),
-                                label: Padding(
+                                label: const Padding(
                                   padding: EdgeInsets.all(12.0),
                                   child: Text('Report New Case'),
                                 ), // <-- Text
@@ -215,7 +215,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                         )),
                   );
                 } else {
-                  return Text("Loading");
+                  return const Text("Loading");
                 }
               },
             ),
@@ -257,7 +257,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                     .map((e) => ReportCardBuilder(e, parent, parentContext))
                     .toList());
           } else {
-            return Text("");
+            return const Text("");
           }
         });
   }
@@ -269,12 +269,10 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
     reportField['id'] = reportData.id;
     DateTime reportedDate =
         (reportField['date_reported'] as Timestamp).toDate();
-    String verified_date = reportField['date_verified'] == null
+    String verifiedDate = reportField['date_verified'] == null
         ? ""
         : reportField['date_verified'].toString();
-    reportField['process_status'] = reportField['process_status'] == null
-        ? "unprocessed"
-        : reportField['process_status'];
+    reportField['process_status'] = reportField['process_status'] ?? "unprocessed";
     if (reportField['date_verified'] != null) {
       reportField['process_status'] = "processed";
     }
@@ -290,7 +288,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
     TextEditingController messageController = TextEditingController();
     return StatefulBuilder(builder: (context, setState) {
       return Container(
-        margin: EdgeInsets.all(5),
+        margin: const EdgeInsets.all(5),
         child: Scrollbar(
           controller: scroll,
           child: SingleChildScrollView(
@@ -310,39 +308,39 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       ListTile(
-                        leading: Icon(Icons.person, size: 60),
+                        leading: const Icon(Icons.person, size: 60),
                         title: MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: Text(
                               'Reported By: ${reportField['reported_by']}',
-                              style: TextStyle(fontSize: 20.0)),
+                              style: const TextStyle(fontSize: 20.0)),
                         ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('Adress: ${parent.id}',
-                                style: TextStyle(fontSize: 18.0)),
+                                style: const TextStyle(fontSize: 18.0)),
                             Container(
-                              margin: EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(bottom: 5),
                               child: Text(
                                   'Reported Date: ${reportedDate.toString()}',
-                                  style: TextStyle(fontSize: 10.0)),
+                                  style: const TextStyle(fontSize: 10.0)),
                             ),
                             Container(
-                              margin: EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(bottom: 5),
                               child: Text(
-                                  '${verified_date == "" ? "PENDING VERIFICATION" : "VERIFIED"}',
-                                  style: TextStyle(fontSize: 10.0)),
+                                  verifiedDate == "" ? "PENDING VERIFICATION" : "VERIFIED",
+                                  style: const TextStyle(fontSize: 10.0)),
                             ),
                             Container(
-                              margin: EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(bottom: 5),
                               child: Text(
-                                  "${reportField['process_status'].toString().toUpperCase()}",
-                                  style: TextStyle(fontSize: 10.0)),
+                                  reportField['process_status'].toString().toUpperCase(),
+                                  style: const TextStyle(fontSize: 10.0)),
                             ),
                             Text(
-                                'Concern: ${reportField['concern'] == null ? '-' : reportField['concern']}',
-                                style: TextStyle(fontSize: 18.0)),
+                                'Concern: ${reportField['concern'] ?? '-'}',
+                                style: const TextStyle(fontSize: 18.0)),
                             //BUTTONS
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
@@ -365,7 +363,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                                           parent: parent,
                                                           context: context));
                                             },
-                                            icon: Icon(Icons.list,
+                                            icon: const Icon(Icons.list,
                                                 color: Color.fromARGB(
                                                     255, 2, 86, 155))))),
                                 Visibility(
@@ -394,12 +392,12 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                 Visibility(
                                   visible: isAdmin,
                                   child: Tooltip(
-                                    message: verified_date == ""
+                                    message: verifiedDate == ""
                                         ? "Click to Verify Report"
                                         : "Click to Unverify Report",
                                     child: IconButton(
                                         onPressed: () {
-                                          if (verified_date == "") {
+                                          if (verifiedDate == "") {
                                             FirebaseFirestore.instance
                                                 .collection('BaranggayCases')
                                                 .doc(parent.id)
@@ -420,16 +418,16 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                             });
                                           }
                                         },
-                                        icon: verified_date == ""
-                                            ? Icon(Icons.remove_moderator,
+                                        icon: verifiedDate == ""
+                                            ? const Icon(Icons.remove_moderator,
                                                 color: Colors.red)
-                                            : Icon(Icons.verified,
+                                            : const Icon(Icons.verified,
                                                 color: Colors.green)),
                                   ),
                                 ),
                                 Visibility(
                                   visible: isAdmin ||
-                                      (verified_date == "" && !isAdmin),
+                                      (verifiedDate == "" && !isAdmin),
                                   child: IconButton(
                                       onPressed: () => {
                                             showDialog(
@@ -449,7 +447,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                 ),
                                 Visibility(
                                   visible: isAdmin ||
-                                      (verified_date == "" && !isAdmin),
+                                      (verifiedDate == "" && !isAdmin),
                                   child: IconButton(
                                       onPressed: () {
                                         FirebaseFirestore.instance
@@ -459,7 +457,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                             .doc(reportData.id)
                                             .delete();
                                       },
-                                      icon: Icon(
+                                      icon: const Icon(
                                         Icons.delete,
                                         color: Colors.redAccent,
                                       )),
@@ -476,7 +474,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                 child: Stepper(
                                     type: StepperType.horizontal,
                                     controlsBuilder: (context, details) {
-                                      return Row(
+                                      return const Row(
                                         children: <Widget>[],
                                       );
                                     },
@@ -487,42 +485,42 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                           state: currStep >= 1
                                               ? StepState.complete
                                               : StepState.disabled,
-                                          title: SizedBox.shrink(),
-                                          content: SizedBox.shrink()),
+                                          title: const SizedBox.shrink(),
+                                          content: const SizedBox.shrink()),
                                       Step(
                                           isActive: currStep >= 1,
                                           state: currStep >= 2
                                               ? StepState.complete
                                               : StepState.disabled,
-                                          title: SizedBox.shrink(),
-                                          content: SizedBox.shrink()),
+                                          title: const SizedBox.shrink(),
+                                          content: const SizedBox.shrink()),
                                       Step(
                                           isActive: currStep >= 2,
                                           state: currStep >= 3
                                               ? StepState.complete
                                               : StepState.disabled,
-                                          title: SizedBox.shrink(),
-                                          content: SizedBox.shrink()),
+                                          title: const SizedBox.shrink(),
+                                          content: const SizedBox.shrink()),
                                       Step(
                                           isActive: currStep >= 3,
                                           state: currStep >= 4
                                               ? StepState.complete
                                               : StepState.disabled,
-                                          title: SizedBox.shrink(),
-                                          content: SizedBox.shrink()),
+                                          title: const SizedBox.shrink(),
+                                          content: const SizedBox.shrink()),
                                       Step(
                                           isActive: currStep >= 4,
                                           state: currStep >= 4
                                               ? StepState.complete
                                               : StepState.disabled,
-                                          title: SizedBox.shrink(),
-                                          content: SizedBox.shrink())
+                                          title: const SizedBox.shrink(),
+                                          content: const SizedBox.shrink())
                                     ]),
                               ),
                             ),
 
                             //CONVERSATION
-                            Text("Conversations:"),
+                            const Text("Conversations:"),
                             StreamBuilder<List<dynamic>>(
                                 stream: GetConversation(parent, reportData),
                                 builder: (context, snapshot) {
@@ -535,7 +533,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                               .toDate());
                                     });
                                     return Container(
-                                      padding: EdgeInsets.all(8),
+                                      padding: const EdgeInsets.all(8),
                                       decoration:
                                           BoxDecoration(border: Border.all()),
                                       width:
@@ -556,15 +554,15 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                       ),
                                     );
                                   } else {
-                                    return Text("Loading Conversations");
+                                    return const Text("Loading Conversations");
                                   }
                                 }),
                             Container(
-                              margin: EdgeInsets.only(bottom: 5),
+                              margin: const EdgeInsets.only(bottom: 5),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width:
                                         MediaQuery.of(context).size.width / 5,
                                     child: TextFormField(
@@ -580,7 +578,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                         });
                                       },
                                       controller: messageController,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                           hintText: "Enter Message"),
                                     ),
                                   ),
@@ -596,7 +594,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                           messageController.text = "";
                                         });
                                       },
-                                      icon: Icon(Icons.send))
+                                      icon: const Icon(Icons.send))
                                 ],
                               ),
                             )
@@ -634,11 +632,11 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
         child: Dialog(
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Center(
+                  const Center(
                     child: Text("NEW CASE REPORT"),
                   ),
                   StreamBuilder(
@@ -654,8 +652,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                   if (selectedBaranggay == "") {
                                     return "Please Select Baranggay";
                                   }
+                                  return null;
                                 },
-                                hint: Text("Select Baranggay"),
+                                hint: const Text("Select Baranggay"),
                                 items: data
                                     .map((e) => DropdownMenuItem(
                                           value: e.id,
@@ -675,14 +674,14 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                 }),
                           );
                         } else {
-                          return Text("Loading Baranggay");
+                          return const Text("Loading Baranggay");
                         }
                       }),
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: DropdownButtonFormField(
                         value: selectedCaseStatus,
-                        hint: Text("Select Report Status"),
+                        hint: const Text("Select Report Status"),
                         items: CaseStatus.values
                             .map((e) => DropdownMenuItem(
                                   value: e,
@@ -704,10 +703,10 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                     visible: selectedCaseStatus == CaseStatus.active ||
                         selectedCaseStatus == CaseStatus.suspected,
                     child: Container(
-                      margin: EdgeInsets.only(top: 10),
+                      margin: const EdgeInsets.only(top: 10),
                       child: Column(
                         children: [
-                          Align(
+                          const Align(
                               alignment: Alignment.centerLeft,
                               child: Text("Fill up all information below")),
                           Row(
@@ -732,8 +731,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                     if (value == "") {
                                       return "Required Field";
                                     }
+                                    return null;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: "Full Name",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always),
@@ -758,8 +758,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                     if (value == "") {
                                       return "Required Field";
                                     }
+                                    return null;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: "Address",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always),
@@ -792,12 +793,13 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                     if (value == "") {
                                       return "Required Field";
                                     }
+                                    return null;
                                   },
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]'))
                                   ],
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: "Age",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always),
@@ -822,8 +824,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                     if (value == "") {
                                       return "Required Field";
                                     }
+                                    return null;
                                   },
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                       labelText: "Email",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always),
@@ -850,8 +853,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                 if (value == "") {
                                   return "Required Field";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   labelText: "Mobile #",
                                   floatingLabelBehavior:
                                       FloatingLabelBehavior.always),
@@ -869,13 +873,13 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                       textAlignVertical: TextAlignVertical.center,
                       maxLines: 4,
                       minLines: 1,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: "CONCERNS",
                           floatingLabelBehavior: FloatingLabelBehavior.always),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    margin: const EdgeInsets.only(top: 10, bottom: 5),
                     child: Align(
                       alignment: Alignment.bottomRight,
                       child: Row(
@@ -905,13 +909,13 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                     Navigator.pop(parentContext);
                                   });
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.send,
                                 ),
-                                label: Text("SUBMIT REPORT")),
+                                label: const Text("SUBMIT REPORT")),
                           ),
                           OutlinedButton.icon(
-                            label: Text("Cancel"),
+                            label: const Text("Cancel"),
                             onPressed: () {
                               setState(() {
                                 selectedBaranggay = "";
@@ -969,7 +973,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                     Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                            "${enableEdit ? 'Fill up all information below' : 'Reported Case Details'}")),
+                            enableEdit ? 'Fill up all information below' : 'Reported Case Details')),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -978,7 +982,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                           child: TextFormField(
                             enabled: enableEdit,
                             controller: fullnameController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 labelText: "Full Name",
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
@@ -989,7 +993,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                           child: TextFormField(
                             enabled: enableEdit,
                             controller: addressController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 labelText: "Address",
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
@@ -1005,7 +1009,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                           child: TextFormField(
                             enabled: enableEdit,
                             controller: ageController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 labelText: "Age",
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
@@ -1016,7 +1020,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                           child: TextFormField(
                             enabled: enableEdit,
                             controller: emailController,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 labelText: "Email",
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
@@ -1029,18 +1033,18 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                       child: TextFormField(
                         enabled: enableEdit,
                         controller: mobileController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             labelText: "Mobile #",
                             floatingLabelBehavior:
                                 FloatingLabelBehavior.always),
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 5),
-                      child: Text("Process Details"),
+                      margin: const EdgeInsets.only(top: 5),
+                      child: const Text("Process Details"),
                     ),
                     Container(
-                      margin: EdgeInsets.all(1),
+                      margin: const EdgeInsets.all(1),
                       child: Theme(
                         data: Theme.of(context),
                         // ignore: prefer__literals_to_create_immutables
@@ -1057,9 +1061,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                               currStep < 4 &&
                                               isAdmin as bool == true),
                                       child: Padding(
-                                        padding: EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.all(8.0),
                                         child: ElevatedButton(
-                                          style: ButtonStyle(),
+                                          style: const ButtonStyle(),
                                           onPressed: () {
                                             setState(() {
                                               currStep += 1;
@@ -1081,7 +1085,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                                   parent, reportedCase, data);
                                             });
                                           },
-                                          child: Text('COMPLETE'),
+                                          child: const Text('COMPLETE'),
                                         ),
                                       ),
                                     ),
@@ -1102,16 +1106,16 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                     state: currStep >= 1
                                         ? StepState.complete
                                         : StepState.disabled,
-                                    title: Text("Get Swab Test"),
-                                    content: Text(
+                                    title: const Text("Get Swab Test"),
+                                    content: const Text(
                                         "Check AVAILABLE SWAB CENTER page to look for Swab Center near you")),
                                 Step(
                                     isActive: currStep >= 1,
                                     state: currStep >= 2
                                         ? StepState.complete
                                         : StepState.disabled,
-                                    title: Text("Send Swab Test Result "),
-                                    content: Text(
+                                    title: const Text("Send Swab Test Result "),
+                                    content: const Text(
                                         "To maintain privacy and confidentiality email us your Swab Test Result at healthcentercatgrande2021@gmail.com")),
                                 Step(
                                     isActive: currStep >= 2,
@@ -1119,24 +1123,24 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                         ? StepState.complete
                                         : StepState.disabled,
                                     title:
-                                        Text("Admin is processing your report"),
-                                    content: Text(
+                                        const Text("Admin is processing your report"),
+                                    content: const Text(
                                         "Please wait while the admin is trying to process your report, this will take a couple of hours. If this process takes longer than usual you can drop us a message on conversation box")),
                                 Step(
                                     isActive: currStep >= 3,
                                     state: currStep >= 4
                                         ? StepState.complete
                                         : StepState.disabled,
-                                    title: Text("Admin will contact you"),
-                                    content: Text(
+                                    title: const Text("Admin will contact you"),
+                                    content: const Text(
                                         "Please expect a phone call or email from our team. Thank you")),
                                 Step(
                                     isActive: currStep >= 4,
                                     state: currStep >= 4
                                         ? StepState.complete
                                         : StepState.disabled,
-                                    title: Text("DONE"),
-                                    content: Text(
+                                    title: const Text("DONE"),
+                                    content: const Text(
                                         "We Appreciate your cooperation. Thank you so much. Stay Safe!"))
                               ]),
                         ),
@@ -1150,7 +1154,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Padding(
+                child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text("Close"),
                 ))
@@ -1177,11 +1181,11 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
           width: MediaQuery.of(parentContext).size.width / 2,
           child: SingleChildScrollView(
               child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Center(
+                const Center(
                   child: Text("NEW CASE REPORT"),
                 ),
                 StreamBuilder(
@@ -1195,8 +1199,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                               if (selectedBaranggay == "") {
                                 return "Please Select Baranggay";
                               }
+                              return null;
                             },
-                            hint: Text("Select Baranggay"),
+                            hint: const Text("Select Baranggay"),
                             value: parent.id,
                             items: data
                                 .map((e) => DropdownMenuItem(
@@ -1216,12 +1221,12 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                               });
                             });
                       } else {
-                        return Text("Loading Baranggay");
+                        return const Text("Loading Baranggay");
                       }
                     }),
                 DropdownButtonFormField(
                     value: selectedCaseStatus,
-                    hint: Text("Select Report Status"),
+                    hint: const Text("Select Report Status"),
                     items: CaseStatus.values
                         .map((e) => DropdownMenuItem(
                               value: e,
@@ -1244,7 +1249,7 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                   textAlignVertical: TextAlignVertical.center,
                   maxLines: 4,
                   minLines: 1,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: "CONCERNS",
                       floatingLabelBehavior: FloatingLabelBehavior.always),
                 ),
@@ -1274,13 +1279,13 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
                                 Navigator.pop(context);
                               });
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.send,
                             ),
-                            label: Text("UPDATE REPORT")),
+                            label: const Text("UPDATE REPORT")),
                       ),
                       OutlinedButton.icon(
-                        label: Text("Cancel"),
+                        label: const Text("Cancel"),
                         onPressed: () {
                           setState(() {
                             selectedBaranggay = "";
@@ -1342,9 +1347,9 @@ class _ReportedCasePageState extends State<ReportedCasePage> {
     doc.update(data);
   }
 
-  void SubmitReportedCase(String _baranggay, CaseStatus _status,
-      String _concern, dynamic detailsData) {
+  void SubmitReportedCase(String baranggay, CaseStatus status,
+      String concern, dynamic detailsData) {
     CasesInfoManager()
-        .SaveCaseRecord(_baranggay, _status, _concern, detailsData);
+        .SaveCaseRecord(baranggay, status, concern, detailsData);
   }
 }

@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:infodash_app/home.dart';
 
 class VariantPage extends StatefulWidget {
-  VariantPage({super.key, required this.title});
+  const VariantPage({super.key, required this.title});
   final String title;
 
   @override
@@ -61,12 +61,12 @@ class _VariantPageState extends State<VariantPage> {
             ),
             child: Container(
               color: Colors.white,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 children: [
                   Text(
                     title,
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
                 ],
               ),
@@ -84,13 +84,13 @@ class _VariantPageState extends State<VariantPage> {
   Widget Content() {
     VariantsInfo variantData = new VariantsInfo();
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: Center(
           child: Flex(
         direction: Axis.vertical,
         // ignore: prefer__literals_to_create_immutables
         children: [
-          Text(
+          const Text(
             "REPORTED SAR-COV2 VARIANTS",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           ),
@@ -104,13 +104,13 @@ class _VariantPageState extends State<VariantPage> {
                     onPressed: () {
                       AddVariant(context, variantData);
                     },
-                    label: Text('Add New Variant'),
-                    icon: Icon(Icons.post_add_rounded),
+                    label: const Text('Add New Variant'),
+                    icon: const Icon(Icons.post_add_rounded),
                     backgroundColor: Colors.cyanAccent.shade700,
                   ),
                 );
               } else {
-                return Text("");
+                return const Text("");
               }
             },
           ),
@@ -128,7 +128,7 @@ class _VariantPageState extends State<VariantPage> {
                           child: DataTable(
                               // ignore: prefer__literals_to_create_immutables
                               columns: <DataColumn>[
-                                DataColumn(
+                                const DataColumn(
                                   label: Expanded(
                                     child: Text(
                                       'WHO LABEL',
@@ -137,7 +137,7 @@ class _VariantPageState extends State<VariantPage> {
                                     ),
                                   ),
                                 ),
-                                DataColumn(
+                                const DataColumn(
                                   label: Expanded(
                                     child: Text(
                                       'PANGO LINEAGE',
@@ -146,7 +146,7 @@ class _VariantPageState extends State<VariantPage> {
                                     ),
                                   ),
                                 ),
-                                DataColumn(
+                                const DataColumn(
                                   label: Expanded(
                                     child: Text(
                                       'FIRST DETECTED',
@@ -155,7 +155,7 @@ class _VariantPageState extends State<VariantPage> {
                                     ),
                                   ),
                                 ),
-                                DataColumn(
+                                const DataColumn(
                                   label: Expanded(
                                     child: Text(
                                       'DATE REPORTED',
@@ -167,7 +167,7 @@ class _VariantPageState extends State<VariantPage> {
                                 DataColumn(
                                   label: Visibility(
                                     visible: isUserAdmin,
-                                    child: Expanded(
+                                    child: const Expanded(
                                       child: Text(
                                         'OPTIONS',
                                         style: TextStyle(
@@ -201,7 +201,7 @@ class _VariantPageState extends State<VariantPage> {
                                               onPressed: () {
                                                 AddVariant(contentContext, e);
                                               },
-                                              icon: Icon(Icons.edit,
+                                              icon: const Icon(Icons.edit,
                                                   color: Colors.yellow)),
                                           IconButton(
                                               onPressed: () {
@@ -211,7 +211,7 @@ class _VariantPageState extends State<VariantPage> {
                                                     return SizedBox(
                                                         child: AlertDialog(
                                                       title:
-                                                          Text("Save Changes?"),
+                                                          const Text("Save Changes?"),
                                                       actionsAlignment:
                                                           MainAxisAlignment.end,
                                                       actions: [
@@ -229,29 +229,29 @@ class _VariantPageState extends State<VariantPage> {
                                                                 );
                                                               }));
                                                             },
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons.play_arrow,
                                                               color:
                                                                   Colors.green,
                                                             ),
-                                                            label: Text("Yes")),
+                                                            label: const Text("Yes")),
                                                         ElevatedButton.icon(
                                                             onPressed: () {
                                                               Navigator.pop(
                                                                   context);
                                                             },
-                                                            icon: Icon(
+                                                            icon: const Icon(
                                                               Icons.cancel,
                                                               color: Colors.red,
                                                             ),
                                                             label:
-                                                                Text("Cancel"))
+                                                                const Text("Cancel"))
                                                       ],
                                                     ));
                                                   },
                                                 );
                                               },
-                                              icon: Icon(
+                                              icon: const Icon(
                                                 Icons.delete,
                                                 color: Colors.red,
                                               ))
@@ -263,11 +263,11 @@ class _VariantPageState extends State<VariantPage> {
                       ),
                     );
                   } else if (snapshot.hasError) {
-                    return Text('Error Loading Data');
+                    return const Text('Error Loading Data');
                   }
 
                   // By default, show a loading spinner.
-                  return CircularProgressIndicator(
+                  return const CircularProgressIndicator(
                     backgroundColor: Colors.redAccent,
                     valueColor: AlwaysStoppedAnimation(Colors.green),
                     strokeWidth: 10,
@@ -288,9 +288,7 @@ class _VariantPageState extends State<VariantPage> {
         new TextEditingController(text: data.firstDetected);
     late DateTime detectedDate = data.dateReported;
     var outputFormat = DateFormat('MMMM dd, yyyy');
-    if (data.dateReported != null) {
-      reportedDateController.text = outputFormat.format(data.dateReported);
-    }
+    reportedDateController.text = outputFormat.format(data.dateReported);
     TextEditingController descriptionController =
         new TextEditingController(text: data.description);
 
@@ -315,13 +313,13 @@ class _VariantPageState extends State<VariantPage> {
                   width: MediaQuery.of(parentContext).size.width / 3,
                   child: SingleChildScrollView(
                     child: Container(
-                      margin: EdgeInsets.all(20),
+                      margin: const EdgeInsets.all(20),
                       child: Flex(
                         direction: Axis.vertical,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Text(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: const Text(
                               "Add New Variant",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
@@ -329,7 +327,7 @@ class _VariantPageState extends State<VariantPage> {
                           TextFormField(
                             controller: nameController,
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "Enter Variant Name",
                                 labelText: "Variant Name",
                                 floatingLabelBehavior:
@@ -338,7 +336,7 @@ class _VariantPageState extends State<VariantPage> {
                           TextFormField(
                             controller: lineageController,
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "Enter Lineage",
                                 labelText: "Lineage",
                                 floatingLabelBehavior:
@@ -347,7 +345,7 @@ class _VariantPageState extends State<VariantPage> {
                           TextFormField(
                             controller: firstDetectedCountryController,
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "Enter First Detected Country",
                                 labelText: "First Detected County",
                                 floatingLabelBehavior:
@@ -375,7 +373,7 @@ class _VariantPageState extends State<VariantPage> {
                                 }
                               });
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "Enter First Detected Date",
                                 labelText: "First Detected Date",
                                 floatingLabelBehavior:
@@ -387,22 +385,22 @@ class _VariantPageState extends State<VariantPage> {
                             minLines: 2,
                             maxLines: null,
                             textAlign: TextAlign.center,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                                 hintText: "Enter Description",
                                 labelText: "Description",
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.always),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 5),
-                            child: Text(
+                            margin: const EdgeInsets.only(top: 5),
+                            child: const Text(
                               "Symptoms",
                               style: TextStyle(fontWeight: FontWeight.w600),
                             ),
                           ),
                           Center(
                             child: Container(
-                              margin: EdgeInsets.all(2),
+                              margin: const EdgeInsets.all(2),
                               child: Row(
                                 children: [
                                   SizedBox(
@@ -412,12 +410,12 @@ class _VariantPageState extends State<VariantPage> {
                                         5,
                                     child: TextFormField(
                                       controller: symptomsValue,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                           hintText: "Enter Symptom"),
                                     ),
                                   ),
                                   IconButton(
-                                    icon: Icon(Icons.add_circle_outline),
+                                    icon: const Icon(Icons.add_circle_outline),
                                     onPressed: () {
                                       setState(() {
                                         if (symptomsValue.text != "") {
@@ -443,7 +441,7 @@ class _VariantPageState extends State<VariantPage> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 20),
+                            margin: const EdgeInsets.only(top: 20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -470,7 +468,7 @@ class _VariantPageState extends State<VariantPage> {
                                         );
                                       }));
                                     },
-                                    child: Text("Save")),
+                                    child: const Text("Save")),
                                 OutlinedButton(
                                     onPressed: () {
                                       Navigator.of(context).push(
@@ -482,7 +480,7 @@ class _VariantPageState extends State<VariantPage> {
                                         );
                                       }));
                                     },
-                                    child: Text("Cancel"))
+                                    child: const Text("Cancel"))
                               ],
                             ),
                           )
@@ -505,7 +503,7 @@ class _VariantPageState extends State<VariantPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
                   '- $symptomValue',
                 ),
@@ -517,7 +515,7 @@ class _VariantPageState extends State<VariantPage> {
                       callback(symptomsList);
                     });
                   },
-                  icon: Icon(Icons.remove))
+                  icon: const Icon(Icons.remove))
             ],
           ),
         );
@@ -528,10 +526,10 @@ class _VariantPageState extends State<VariantPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Text(
                   '- $symptomValue',
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
               ),
               IconButton(
@@ -541,7 +539,7 @@ class _VariantPageState extends State<VariantPage> {
                       callback(symptomsList);
                     });
                   },
-                  icon: Icon(Icons.remove))
+                  icon: const Icon(Icons.remove))
             ],
           ),
         );
@@ -563,13 +561,13 @@ class _VariantPageState extends State<VariantPage> {
         width: MediaQuery.of(parent).size.width / 2,
         child: SingleChildScrollView(
           child: Container(
-              margin: EdgeInsets.all(20),
+              margin: const EdgeInsets.all(20),
               child: Flex(
                 direction: Axis.vertical,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     child: Image.network(
                       e.imageUrl,
                       scale: 0.5,
@@ -581,69 +579,69 @@ class _VariantPageState extends State<VariantPage> {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: SizedBox(
                           width: MediaQuery.of(parent).size.width / 2,
-                          child: Center(
+                          child: const Center(
                               child: Text(
                             "GENERAL DETAILS",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )))),
                   Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 5),
+                    margin: const EdgeInsets.only(top: 10, bottom: 5),
                     child: Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(right: 20),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 20),
+                            child: const Text(
                               "VARIANT NAME",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
                         Text(
                           e.name.toUpperCase(),
-                          style: TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(right: 20),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 20),
+                            child: const Text(
                               "LINEAGE",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
                         Text(
                           e.lineage.toUpperCase(),
-                          style: TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                    margin: const EdgeInsets.only(top: 5, bottom: 5),
                     child: Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(right: 20),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 20),
+                            child: const Text(
                               "FIRST DETECTED AT",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
                         Text(
                           e.firstDetected.toUpperCase(),
-                          style: TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 5, bottom: 10),
+                    margin: const EdgeInsets.only(top: 5, bottom: 10),
                     child: Row(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(right: 20),
-                            child: Text(
+                            margin: const EdgeInsets.only(right: 20),
+                            child: const Text(
                               "DATE REPORTED",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )),
@@ -655,19 +653,19 @@ class _VariantPageState extends State<VariantPage> {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: SizedBox(
                           width: MediaQuery.of(parent).size.width / 2,
-                          child: Center(
+                          child: const Center(
                               child: Text(
                             "VARIANT DESCRIPTION",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           )))),
                   Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 20),
+                    margin: const EdgeInsets.only(top: 10, bottom: 20),
                     child: Center(
                       child: Padding(
-                        padding: EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(15),
                         child: Text(
                           e.description,
-                          style: TextStyle(
+                          style: const TextStyle(
                               wordSpacing: 5,
                               fontSize: 15,
                               fontWeight: FontWeight.w600),
@@ -679,7 +677,7 @@ class _VariantPageState extends State<VariantPage> {
                       decoration: BoxDecoration(border: Border.all(width: 1)),
                       child: SizedBox(
                           width: MediaQuery.of(parent).size.width / 2,
-                          child: Center(
+                          child: const Center(
                               child: Text(
                             "SYMPTOMS",
                             style: TextStyle(fontWeight: FontWeight.bold),
@@ -691,7 +689,7 @@ class _VariantPageState extends State<VariantPage> {
                         children: e.symptomps
                             .map((e) => Text(
                                   e.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontStyle: FontStyle.italic,
                                       fontWeight: FontWeight.w600),
                                 ))

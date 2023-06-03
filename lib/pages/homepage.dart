@@ -6,11 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../infodashlib/news.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key, required this.title});
+  const HomePage({super.key, required this.title});
   final String title;
   @override
   State<HomePage> createState() => _HomePageState(title);
@@ -39,13 +38,13 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Container(
           color: Colors.white,
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Row(
             children: [
               Container(
                 child: Text(
                   title,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
             ],
@@ -53,8 +52,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       Container(
-          margin: EdgeInsets.only(left: 20, top: 20),
-          child: Row(
+          margin: const EdgeInsets.only(left: 20, top: 20),
+          child: const Row(
             children: [
               Text("NEWS",
                   style: TextStyle(
@@ -78,8 +77,8 @@ class _HomePageState extends State<HomePage> {
                       enableInfiniteScroll: true,
                       reverse: false,
                       autoPlay: true,
-                      autoPlayInterval: Duration(seconds: 10),
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayInterval: const Duration(seconds: 10),
+                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
                       autoPlayCurve: Curves.fastOutSlowIn,
                       enlargeCenterPage: true,
                     ),
@@ -94,20 +93,20 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 i.title,
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                               Image(
                                 image: NetworkImage(i.media),
                                 height: MediaQuery.of(context).size.height / 2,
                                 errorBuilder: (context, error, stackTrace) => Image(
-                                    image: NetworkImage(
+                                    image: const NetworkImage(
                                         'https://www.trendsetter.com/pub/media/catalog/product/placeholder/default/no_image_placeholder.jpg'),
                                     height:
                                         MediaQuery.of(context).size.height / 2 -
                                             10),
                               ),
                               InkWell(
-                                child: Text("Read Full Article",
+                                child: const Text("Read Full Article",
                                     style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         color: Colors.blue)),
@@ -124,11 +123,11 @@ class _HomePageState extends State<HomePage> {
                     }).toList(),
                   );
                 } else if (snapshot.hasError) {
-                  return Text('Error Loading Image');
+                  return const Text('Error Loading Image');
                 }
 
                 // By default, show a loading spinner.
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               },
             ),
           ))
@@ -137,11 +136,12 @@ class _HomePageState extends State<HomePage> {
 
   Widget? NewsWidgets() {
     GetNews().then((value) {
-      debugPrint('News Value : ' + value.title);
+      debugPrint('News Value : ${value.title}');
       return Container(
         child: Text(value.title),
       );
     });
+    return null;
   }
 
   Future<List<dynamic>> GetNewsData() async {
@@ -199,14 +199,14 @@ class _HomePageState extends State<HomePage> {
   Future<List<News>> GetNewsList() async {
     List<dynamic> data = await GetNewsData();
     List<News> result = [];
-    data.forEach((element) {
+    for (var element in data) {
       result.add(News(
           title: element['title'].toString(),
           media: element['media'].toString(),
           link: element['link'].toString(),
           rights: element['rights'].toString(),
           publishDate: element['publishDate'].toString()));
-    });
+    }
 
     return result;
   }

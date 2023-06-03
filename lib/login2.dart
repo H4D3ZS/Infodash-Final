@@ -6,7 +6,7 @@ import 'package:infodash_app/home.dart';
 import 'infodashlib/users.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -39,25 +39,25 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: w,
             height: h * 0.3,
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/img/loginimg.png"),
                   fit: BoxFit.cover),
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
+            margin: EdgeInsets.only(left: 20, right: 20),
             width: w,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Center(
+                Center(
                   child: Text(
                     "INFODASH",
                     style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 50,
                 ),
                 SingleChildScrollView(
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                           BoxShadow(
                               blurRadius: 10,
                               spreadRadius: 7,
-                              offset: const Offset(
+                              offset: Offset(
                                 1,
                                 1,
                               ),
@@ -95,11 +95,11 @@ class _LoginPageState extends State<LoginPage> {
                       controller: emailController,
                       decoration: InputDecoration(
                         hintText: 'Email',
-                        prefixIcon: const Icon(Icons.email),
+                        prefixIcon: Icon(Icons.email),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                           borderSide:
-                              const BorderSide(color: Colors.white, width: 1.0),
+                              BorderSide(color: Colors.white, width: 1.0),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
                 Container(
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                         BoxShadow(
                             blurRadius: 10,
                             spreadRadius: 7,
-                            offset: const Offset(
+                            offset: Offset(
                               1,
                               1,
                             ),
@@ -133,10 +133,10 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
-                      prefixIcon: const Icon(Icons.password),
+                      prefixIcon: Icon(Icons.password),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(color: Colors.white, width: 1.0),
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
                       ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -144,13 +144,13 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 5,
                 ),
               ],
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 70,
           ),
           GestureDetector(
@@ -171,11 +171,11 @@ class _LoginPageState extends State<LoginPage> {
               height: h * 0.08,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                image: const DecorationImage(
+                image: DecorationImage(
                     image: AssetImage("assets/img/loginbtn.png"),
                     fit: BoxFit.cover),
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
                   "Sign In ",
                   style: TextStyle(
@@ -187,7 +187,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           SizedBox(
-            height: w * 0.10,
+            height: w * 0.08,
           ),
           RichText(
             text: TextSpan(
@@ -196,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   TextSpan(
                       text: "Create",
-                      style: const TextStyle(
+                      style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
@@ -226,16 +226,16 @@ class _LoginPageState extends State<LoginPage> {
               height: MediaQuery.of(context).size.height / 6,
               width: MediaQuery.of(context).size.width / 3,
               child: Container(
-                margin: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+                margin: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
                 child: Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     // ignore: prefer__literals_to_create_immutables
                     children: [
-                      const CircularProgressIndicator(),
+                      CircularProgressIndicator(),
                       Container(
-                          margin: const EdgeInsets.only(left: 5),
-                          child: const Text("Logging In...")),
+                          margin: EdgeInsets.only(left: 5),
+                          child: Text("Logging In...")),
                     ],
                   ),
                 ),

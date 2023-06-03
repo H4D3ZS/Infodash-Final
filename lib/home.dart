@@ -633,7 +633,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
 
     return Container(
         width: widget.size,
-        color: Colors.yellow[400],
+        color: Colors.white,
         child: ListView(
           children: [
             Container(
@@ -645,7 +645,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
                       end: Alignment.bottomRight,
                       colors: [
                     Colors.purple,
-                    Colors.amber,
+                    Colors.black,
                   ])),
               child: Text(
                 'INFODASH',
@@ -668,28 +668,35 @@ class _LeftDrawerState extends State<LeftDrawer> {
 
   List<Widget> Tiles() {
     List<Widget> result = List.empty(growable: true);
-    result.add(_tile('Home', context));
-    result.add(_tile('Covid-19 Cases', context));
-    result.add(_tile('Vaccinated People', context));
-    result.add(_tile('Available Vaccination Hub', context));
-    result.add(_tile('Available Swab Center', context));
-    result.add(_tile('Reported Cases', context));
-    result.add(_tile('Report SARS-COV2 Variant', context));
+    result.add(_tile(const Icon(Icons.home), 'Home', context));
+    result.add(_tile(Icon(Icons.sick), 'Covid-19 Cases', context));
+    result.add(
+        _tile(Icon(Icons.people_alt_rounded), 'Vaccinated People', context));
+    result.add(_tile(Icon(Icons.local_hospital_rounded),
+        'Available Vaccination Hub', context));
+    result.add(
+        _tile(Icon(Icons.house_rounded), 'Available Swab Center', context));
+    result
+        .add(_tile(Icon(Icons.person_add_disabled), 'Reported Cases', context));
+    result.add(_tile(const Icon(Icons.report_gmailerrorred),
+        'Report SARS-COV2 Variant', context));
     if (isAdmin) {
-      result.add(_tile('Send Notification', context));
+      result.add(_tile(
+          const Icon(Icons.notification_add), 'Send Notification', context));
     }
-    result.add(_tile('Logout', context));
+    result.add(_tile(const Icon(Icons.logout_rounded), 'Logout', context));
     return result.toList();
   }
 
   String currentPage = "Home";
 
-  Widget _tile(String label, BuildContext context) {
+  Widget _tile(icons, String label, BuildContext context) {
     bool isActive = currentPage == label ? true : false;
     bool isHovering = false;
     return StatefulBuilder(
       builder: (context, setState) {
         return ListTile(
+          leading: icons,
           title: InkWell(
             onTap: () {
               debugPrint(label);
@@ -751,7 +758,7 @@ class _LeftDrawerState extends State<LeftDrawer> {
 
   Color? HoverBackColor(bool isActive, bool isHovering) {
     if (isActive) {
-      return Colors.amber[700];
+      return Colors.black87;
     }
 
     if (isHovering) {

@@ -62,7 +62,7 @@ class MainPage extends StatelessWidget {
           current_page: '',
         );
       } else {
-        return const LoginPage();
+        return LoginPage();
       }
     });
   }

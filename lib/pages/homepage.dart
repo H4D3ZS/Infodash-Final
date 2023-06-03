@@ -94,7 +94,8 @@ class _HomePageState extends State<HomePage> {
                           image: NetworkImage(i.media),
                           height: MediaQuery.of(context).size.height / 2,
                           errorBuilder: (context, error, stackTrace) => Image(
-                              image: AssetImage("asssets/img/no_img.jpg"),
+                              image: NetworkImage(
+                                  'https://www.trendsetter.com/pub/media/catalog/product/placeholder/default/no_image_placeholder.jpg'),
                               height: MediaQuery.of(context).size.height / 2),
                         ),
                         InkWell(

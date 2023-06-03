@@ -1,4 +1,4 @@
-// ignore_for_file: no_logic_in_create_state, prefer_const_constructors, avoid_unnecessary_containers, non_constant_identifier_names, unused_local_variable
+// ignore_for_file: no_logic_in_create_state, prefer_const_constructors, avoid_unnecessary_containers, non_constant_identifier_names, unused_local_variable, unused_import, body_might_complete_normally_nullable
 
 import 'dart:convert';
 
@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // myNews = GetNews();
+    myNews = GetNews();
     newsList = GetNewsList();
   }
 
@@ -84,8 +84,6 @@ class _HomePageState extends State<HomePage> {
                 return Builder(
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                        //width: MediaQuery.of(context).size.width,
-                        //margin: EdgeInsets.symmetric(horizontal: 5.0),
                         child: Column(
                       children: [
                         Text(
@@ -96,8 +94,7 @@ class _HomePageState extends State<HomePage> {
                           image: NetworkImage(i.media),
                           height: MediaQuery.of(context).size.height / 2,
                           errorBuilder: (context, error, stackTrace) => Image(
-                              image: NetworkImage(
-                                  'https://www.trendsetter.com/pub/media/catalog/product/placeholder/default/no_image_placeholder.jpg'),
+                              image: AssetImage("asssets/img/no_img.jpg"),
                               height: MediaQuery.of(context).size.height / 2),
                         ),
                         InkWell(
@@ -130,7 +127,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget? NewsWidgets() {
     GetNews().then((value) {
-      debugPrint('News Value : ' + value.title);
+      debugPrint('News Value : ${value.title}');
       return Container(
         child: Text(value.title),
       );
@@ -147,7 +144,7 @@ class _HomePageState extends State<HomePage> {
     final uri =
         Uri.https('api.newscatcherapi.com', '/v2/search', queryParameters);
     final response = await http.get(uri,
-        headers: {'x-api-key': 'T2ORbsrrw-XHlfijA9nzDkKd1n-CbWKjjz1guHkh97g'});
+        headers: {'x-api-key': 'qWhhOV8km6wibadZ0C4w-MEQVLn95xprvEvR7VQ4H4Y'});
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -192,14 +189,14 @@ class _HomePageState extends State<HomePage> {
   Future<List<News>> GetNewsList() async {
     List<dynamic> data = await GetNewsData();
     List<News> result = [];
-    data.forEach((element) {
+    for (var element in data) {
       result.add(News(
           title: element['title'].toString(),
           media: element['media'].toString(),
           link: element['link'].toString(),
           rights: element['rights'].toString(),
           publishDate: element['publishDate'].toString()));
-    });
+    }
 
     return result;
   }

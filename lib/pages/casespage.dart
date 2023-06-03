@@ -1,4 +1,4 @@
-// ignore_for_file: no_logic_in_create_state
+// ignore_for_file: no_logic_in_create_state, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -99,7 +99,7 @@ class _CasesPageState extends State<CasesPage> {
                                   "${snapshot.data!.where((element) => element.id == e.id).length}"))
                             ]))));
               } else if (snapshot.hasError) {
-                return Text('Error Loading Image');
+                return const Text('Error Loading Image');
               }
 
               // By default, show a loading spinner.

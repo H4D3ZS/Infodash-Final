@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, unrelated_type_equality_checks, import_of_legacy_library_into_null_safe, prefer_const_constructors
+// ignore_for_file: unused_import, unrelated_type_equality_checks, import_of_legacy_library_into_null_safe, prefer_const_constructors, avoid_unnecessary_containers
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +7,6 @@ import 'package:infodash_app/home.dart';
 import 'package:infodash_app/login2.dart';
 import 'firebase_options.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import './login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

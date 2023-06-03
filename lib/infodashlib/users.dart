@@ -8,13 +8,45 @@ class User {
   final String email;
   final String password;
   final String userType;
-  User(this.id, this.email, this.password, this.userType);
+  final String fullName;
+  User(this.id, this.email, this.password, this.userType, this.fullName);
 
-  Map<String, dynamic> toJson() =>
-      {'id': id, 'email': email, 'password': password, 'userType': userType};
+  String _age = "";
 
-  static User fromJson(Map<String, dynamic> json) =>
-      User(json['id'], json['email'], json['password'], json['userType']);
+  String get age => _age;
+
+  set age(String age) {
+    _age = age;
+  }
+
+  String _address = "";
+
+  String get address => _address;
+
+  set address(String address) {
+    _address = address;
+  }
+
+  String _gender = "";
+
+  String get gender => _gender;
+
+  set gender(String gender) {
+    _gender = gender;
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'email': email,
+        'password': password,
+        'userType': userType,
+        'age': age,
+        'address': address,
+        'gender': gender
+      };
+
+  static User fromJson(Map<String, dynamic> json) => User(json['id'],
+      json['email'], json['password'], json['userType'], json['name']);
 
   Future<User> login() async {
     User loggedInUser = this;
@@ -32,15 +64,23 @@ class User {
 
     if (loggedInUser.id != "") {
       await FlutterSession().set("_id", loggedInUser.id);
+      await FlutterSession().set("_userEmail", loggedInUser.email);
+      await FlutterSession().set("_fullName", loggedInUser.fullName);
+      bool isAdmin = false;
+      if (loggedInUser.userType.toUpperCase() == "ADMIN") {
+        isAdmin = true;
+      }
+
+      await FlutterSession().set("_isAdmin", isAdmin);
     }
 
-    // ignore: prefer_const_declarations
+    // ignore: prefer__declarations
     return loggedInUser;
   }
 
   Future<String> register() async {
     final docUser = FirebaseFirestore.instance.collection('UserAccounts').doc();
-    final user = User(docUser.id, email, password, userType);
+    final user = User(docUser.id, email, password, userType, fullName);
     await docUser.set(user.toJson());
     return id;
   }

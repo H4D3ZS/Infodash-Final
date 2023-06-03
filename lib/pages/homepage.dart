@@ -1,4 +1,4 @@
-// ignore_for_file: no_logic_in_create_state, prefer_const_constructors, avoid_unnecessary_containers, non_constant_identifier_names, unused_local_variable, unused_import, body_might_complete_normally_nullable
+// ignore_for_file: no_logic_in_create_state, prefer__ructors, avoid_unnecessary_containers, non_ant_identifier_names, unused_local_variable
 
 import 'dart:convert';
 
@@ -10,7 +10,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+  HomePage({super.key, required this.title});
   final String title;
   @override
   State<HomePage> createState() => _HomePageState(title);
@@ -24,13 +24,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    myNews = GetNews();
+    // myNews = GetNews();
     newsList = GetNewsList();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return Container(
+        child: Column(children: [
       Card(
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
@@ -38,13 +39,13 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Container(
           color: Colors.white,
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20),
           child: Row(
             children: [
               Container(
                 child: Text(
                   title,
-                  style: const TextStyle(color: Colors.black),
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ],
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       Container(
           margin: EdgeInsets.only(left: 20, top: 20),
           child: Row(
-            children: const [
+            children: [
               Text("NEWS",
                   style: TextStyle(
                       decorationThickness: 2.85,
@@ -63,72 +64,80 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.left),
             ],
           )),
-      SingleChildScrollView(
-          child: FutureBuilder<List<News>>(
-        future: newsList,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return CarouselSlider(
-              options: CarouselOptions(
-                height: MediaQuery.of(context).size.height / 1.5,
-                initialPage: 0,
-                enableInfiniteScroll: true,
-                reverse: false,
-                autoPlay: true,
-                autoPlayInterval: Duration(seconds: 10),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
-                autoPlayCurve: Curves.fastOutSlowIn,
-                enlargeCenterPage: true,
-              ),
-              items: snapshot.data!.map((i) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return SingleChildScrollView(
-                        child: Column(
-                      children: [
-                        Text(
-                          i.title,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Image(
-                          image: NetworkImage(i.media),
-                          height: MediaQuery.of(context).size.height / 2,
-                          errorBuilder: (context, error, stackTrace) => Image(
-                              image: NetworkImage(
-                                  'https://www.trendsetter.com/pub/media/catalog/product/placeholder/default/no_image_placeholder.jpg'),
-                              height: MediaQuery.of(context).size.height / 2),
-                        ),
-                        InkWell(
-                          child: Text("Read Full Article",
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.blue)),
-                          onTap: () async {
-                            final url = i.link.toString();
-                            // ignore: deprecated_member_use
-                            await launch(url);
-                          },
-                        )
-                      ],
-                    ));
-                  },
-                );
-              }).toList(),
-            );
-          } else if (snapshot.hasError) {
-            return Text('Error Loading Image');
-          }
+      SizedBox(
+          height: MediaQuery.of(context).size.height - 200,
+          child: SingleChildScrollView(
+            child: FutureBuilder<List<News>>(
+              future: newsList,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return CarouselSlider(
+                    options: CarouselOptions(
+                      height: MediaQuery.of(context).size.height / 2,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 10),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                    ),
+                    items: snapshot.data!.map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return SingleChildScrollView(
+                              //width: MediaQuery.of(context).size.width,
+                              //margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                i.title,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Image(
+                                image: NetworkImage(i.media),
+                                height: MediaQuery.of(context).size.height / 2,
+                                errorBuilder: (context, error, stackTrace) => Image(
+                                    image: NetworkImage(
+                                        'https://www.trendsetter.com/pub/media/catalog/product/placeholder/default/no_image_placeholder.jpg'),
+                                    height:
+                                        MediaQuery.of(context).size.height / 2 -
+                                            10),
+                              ),
+                              InkWell(
+                                child: Text("Read Full Article",
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: Colors.blue)),
+                                onTap: () async {
+                                  final url = i.link.toString();
+                                  // ignore: deprecated_member_use
+                                  await launch(url);
+                                },
+                              )
+                            ],
+                          ));
+                        },
+                      );
+                    }).toList(),
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('Error Loading Image');
+                }
 
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
-      ))
-    ]);
+                // By default, show a loading spinner.
+                return CircularProgressIndicator();
+              },
+            ),
+          ))
+    ]));
   }
 
   Widget? NewsWidgets() {
     GetNews().then((value) {
-      debugPrint('News Value : ${value.title}');
+      debugPrint('News Value : ' + value.title);
       return Container(
         child: Text(value.title),
       );
@@ -145,7 +154,7 @@ class _HomePageState extends State<HomePage> {
     final uri =
         Uri.https('api.newscatcherapi.com', '/v2/search', queryParameters);
     final response = await http.get(uri,
-        headers: {'x-api-key': 'qWhhOV8km6wibadZ0C4w-MEQVLn95xprvEvR7VQ4H4Y'});
+        headers: {'x-api-key': 'K09DxtlC6r4FvmHAMt-fhZuhE2mfESXmGd6K_IoOVs0'});
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
@@ -190,14 +199,14 @@ class _HomePageState extends State<HomePage> {
   Future<List<News>> GetNewsList() async {
     List<dynamic> data = await GetNewsData();
     List<News> result = [];
-    for (var element in data) {
+    data.forEach((element) {
       result.add(News(
           title: element['title'].toString(),
           media: element['media'].toString(),
           link: element['link'].toString(),
           rights: element['rights'].toString(),
           publishDate: element['publishDate'].toString()));
-    }
+    });
 
     return result;
   }

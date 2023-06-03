@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({super.key, required this.title});
+  NotificationPage({super.key, required this.title});
   final String title;
   @override
   State<NotificationPage> createState() => _NotificationPageState(title);
@@ -21,12 +21,12 @@ class _NotificationPageState extends State<NotificationPage> {
       ),
       child: Container(
         color: Colors.white,
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         child: Row(
           children: [
             Text(
               title,
-              style: const TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.black),
             ),
           ],
         ),

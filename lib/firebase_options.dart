@@ -43,7 +43,7 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
+  static FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyCn6q5BeWbNbbTpFbXP7ZKSfo8B0Hy4tJw',
     appId: '1:65544552444:web:cca3deba42089263b43c79',
     messagingSenderId: '65544552444',
@@ -53,7 +53,7 @@ class DefaultFirebaseOptions {
     measurementId: 'G-TRB4ND8C2V',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
+  static FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC7U1td3fD5fcGaXVPFLBtWf-9_LgnhJ2g',
     appId: '1:65544552444:android:52ac6aea34435d91b43c79',
     messagingSenderId: '65544552444',
@@ -61,23 +61,25 @@ class DefaultFirebaseOptions {
     storageBucket: 'infodash-a991c.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
+  static FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDYv8uByoz3k-PC0NJMr0qMK_kq5WWKbuo',
     appId: '1:65544552444:ios:1bad128bf05c856eb43c79',
     messagingSenderId: '65544552444',
     projectId: 'infodash-a991c',
     storageBucket: 'infodash-a991c.appspot.com',
-    iosClientId: '65544552444-u44sudr51j7ldjbrq0j9rlotf4ed4etl.apps.googleusercontent.com',
+    iosClientId:
+        '65544552444-u44sudr51j7ldjbrq0j9rlotf4ed4etl.apps.googleusercontent.com',
     iosBundleId: 'com.example.infodashApp',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
+  static FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyDYv8uByoz3k-PC0NJMr0qMK_kq5WWKbuo',
     appId: '1:65544552444:ios:1bad128bf05c856eb43c79',
     messagingSenderId: '65544552444',
     projectId: 'infodash-a991c',
     storageBucket: 'infodash-a991c.appspot.com',
-    iosClientId: '65544552444-u44sudr51j7ldjbrq0j9rlotf4ed4etl.apps.googleusercontent.com',
+    iosClientId:
+        '65544552444-u44sudr51j7ldjbrq0j9rlotf4ed4etl.apps.googleusercontent.com',
     iosBundleId: 'com.example.infodashApp',
   );
 }

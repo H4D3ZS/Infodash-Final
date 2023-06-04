@@ -137,7 +137,8 @@ class _CasesPageState extends State<CasesPage> {
                                 isAdmin: isUserAdmin,
                               ),
                               Container(
-                                margin: const EdgeInsets.only(top: 20, bottom: 40),
+                                margin:
+                                    const EdgeInsets.only(top: 20, bottom: 40),
                                 child: const Text('All-Time Detailed Cases'),
                               ),
                               SizedBox(
@@ -166,7 +167,8 @@ class _CasesPageState extends State<CasesPage> {
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
-                                        chartValuesOptions: const ChartValuesOptions(
+                                        chartValuesOptions:
+                                            const ChartValuesOptions(
                                           showChartValueBackground: true,
                                           showChartValues: true,
                                           showChartValuesInPercentage: false,
@@ -815,7 +817,8 @@ class _CasesPageState extends State<CasesPage> {
                                                             Navigator.pop(
                                                                 context);
                                                           },
-                                                          child: const Text("OK"))
+                                                          child:
+                                                              const Text("OK"))
                                                     ],
                                                   );
                                                 },

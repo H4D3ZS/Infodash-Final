@@ -189,24 +189,24 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: w * 0.08,
           ),
-          RichText(
-            text: TextSpan(
-                text: "Don't have an account?",
-                style: TextStyle(color: Colors.grey[500], fontSize: 20),
-                children: [
-                  TextSpan(
-                      text: "Create",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()
-                      // ..onTap = () => Get.to(
-                      //       () => SignUpPage(),
-                      //     ),
-                      ),
-                ]),
-          ),
+          // RichText(
+          //   text: TextSpan(
+          //       text: "Don't have an account?",
+          //       style: TextStyle(color: Colors.grey[500], fontSize: 20),
+          //       children: [
+          //         TextSpan(
+          //             text: "Create",
+          //             style: TextStyle(
+          //                 color: Colors.black,
+          //                 fontSize: 20,
+          //                 fontWeight: FontWeight.bold),
+          //             recognizer: TapGestureRecognizer()
+          //             // ..onTap = () => Get.to(
+          //             //       () => SignUpPage(),
+          //             //     ),
+          //             ),
+          //       ]),
+          // ),
         ],
       ),
     );

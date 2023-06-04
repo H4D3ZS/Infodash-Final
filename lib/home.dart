@@ -11,6 +11,7 @@ import 'package:infodash_app/pages/swabcenterpage.dart';
 import 'package:infodash_app/pages/vaccinatedpage.dart';
 import 'package:infodash_app/pages/vaccinationhubpage.dart';
 import 'package:infodash_app/pages/variantpage.dart';
+import 'package:infodash_app/pdf_page.dart';
 import 'package:intl/intl.dart';
 import 'dart:math';
 import 'package:badges/badges.dart' as badges;
@@ -92,156 +93,163 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
     }
 
     return SafeArea(
-      child: Scaffold(
-        body: SizedBox(
-          width: screen_size.width,
-          child: Row(
-            children: [
-              Container(
-                  child: AnimatedSize(
-                      curve: Curves.easeIn,
-                      duration: const Duration(milliseconds: 500),
-                      child: LeftDrawer(
-                        size: _size,
-                        parent: this,
-                      ))),
-              Expanded(
-                flex: 4,
-                child: Container(
-                  child: Column(
-                    children: [
-                      Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.all(8),
-                        child: ClipRect(
-                          child: Expanded(
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.menu,
-                                      color: Colors.black87),
-                                  onPressed: () {
-                                    // _size = screen_size.width / 2;
-                                    _updateSize();
-                                  },
-                                ),
-                                Text("Welcome Back $fullname!"),
-                                const Spacer(),
-                                StreamBuilder<List<dynamic>>(
-                                    stream: GetNotificationData(userId),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        var data = snapshot.data!;
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("/img/background.png"), fit: BoxFit.cover),
+        ),
+        child: Scaffold(
+          body: SizedBox(
+            width: screen_size.width,
+            child: Row(
+              children: [
+                Container(
+                    child: AnimatedSize(
+                        curve: Curves.easeIn,
+                        duration: const Duration(milliseconds: 500),
+                        child: LeftDrawer(
+                          size: _size,
+                          parent: this,
+                        ))),
+                Expanded(
+                  flex: 4,
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(8),
+                          child: ClipRect(
+                            child: Expanded(
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.menu,
+                                        color: Colors.black87),
+                                    onPressed: () {
+                                      // _size = screen_size.width / 2;
+                                      _updateSize();
+                                    },
+                                  ),
+                                  Text("Welcome Back $fullname!"),
+                                  const Spacer(),
+                                  StreamBuilder<List<dynamic>>(
+                                      stream: GetNotificationData(userId),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          var data = snapshot.data!;
 
-                                        for (var element in data) {
-                                          bool isRead = element['read'] as bool;
-                                          if (!isRead) {
-                                            hasUnreadNotification = true;
+                                          for (var element in data) {
+                                            bool isRead =
+                                                element['read'] as bool;
+                                            if (!isRead) {
+                                              hasUnreadNotification = true;
+                                            }
                                           }
-                                        }
-                                        return badges.Badge(
-                                          ignorePointer: false,
-                                          showBadge: hasUnreadNotification,
-                                          badgeContent: const Text(''),
-                                          position:
-                                              badges.BadgePosition.topStart(
-                                                  start: 8),
-                                          child: PopupMenuButton(
-                                            onSelected: (value) {
-                                              showDialog(
-                                                context: context,
-                                                builder: (dialogContext) {
-                                                  return NotificationDialog(
-                                                      dialogContext, value);
-                                                },
-                                              );
-                                            },
-                                            tooltip: "Show Notifications",
-                                            position: PopupMenuPosition.under,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius
-                                                        .circular(20)
-                                                    .copyWith(
-                                                        topRight: const Radius
-                                                            .circular(0))),
-                                            icon:
-                                                const Icon(Icons.notifications),
-                                            elevation: 10,
-                                            color: Colors.grey.shade300,
-                                            itemBuilder: (context) {
-                                              if (data.isEmpty) {
-                                                return [
-                                                  const PopupMenuItem(
-                                                      child: Text(
-                                                          "No Notifications"))
-                                                ].toList();
-                                              }
-
-                                              data.sort((a, b) {
-                                                return (b['date_sent']
-                                                        as Timestamp)
-                                                    .toDate()
-                                                    .compareTo((a['date_sent']
-                                                            as Timestamp)
-                                                        .toDate());
-                                              });
-                                              data.sort((a, b) {
-                                                if (b['read'] == false) {
-                                                  return 1;
+                                          return badges.Badge(
+                                            ignorePointer: false,
+                                            showBadge: hasUnreadNotification,
+                                            badgeContent: const Text(''),
+                                            position:
+                                                badges.BadgePosition.topStart(
+                                                    start: 8),
+                                            child: PopupMenuButton(
+                                              onSelected: (value) {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (dialogContext) {
+                                                    return NotificationDialog(
+                                                        dialogContext, value);
+                                                  },
+                                                );
+                                              },
+                                              tooltip: "Show Notifications",
+                                              position: PopupMenuPosition.under,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius
+                                                          .circular(20)
+                                                      .copyWith(
+                                                          topRight: const Radius
+                                                              .circular(0))),
+                                              icon: const Icon(
+                                                  Icons.notifications),
+                                              elevation: 10,
+                                              color: Colors.grey.shade300,
+                                              itemBuilder: (context) {
+                                                if (data.isEmpty) {
+                                                  return [
+                                                    const PopupMenuItem(
+                                                        child: Text(
+                                                            "No Notifications"))
+                                                  ].toList();
                                                 }
-                                                return -1;
-                                              });
-                                              return data.map((e) {
-                                                // if (e['read'] as bool == false) {
-                                                //   setState(() {
-                                                //     hasUnreadNotification = true;
-                                                //   });
-                                                // }
-                                                return NotificationCard(
-                                                    context, e);
-                                              }).toList();
 
-                                              // return [
-                                              //   PopupMenuItem(
-                                              //       value: "Notifications",
-                                              //       child: SizedBox(
-                                              //           width: MediaQuery.of(context)
-                                              //                   .size
-                                              //                   .width /
-                                              //               1,
-                                              //           child: Card(
-                                              //               child: Text(
-                                              //                   "Sample Notification"))))
-                                              // ];
-                                            },
-                                          ),
-                                        );
-                                      } else {
-                                        return const Text(
-                                            "Loading Notification");
-                                      }
-                                    }),
-                                CircleAvatar(
-                                  backgroundColor: avatarColor,
-                                  child: Text(userEmail[0].toUpperCase()),
-                                ),
-                              ],
+                                                data.sort((a, b) {
+                                                  return (b['date_sent']
+                                                          as Timestamp)
+                                                      .toDate()
+                                                      .compareTo((a['date_sent']
+                                                              as Timestamp)
+                                                          .toDate());
+                                                });
+                                                data.sort((a, b) {
+                                                  if (b['read'] == false) {
+                                                    return 1;
+                                                  }
+                                                  return -1;
+                                                });
+                                                return data.map((e) {
+                                                  // if (e['read'] as bool == false) {
+                                                  //   setState(() {
+                                                  //     hasUnreadNotification = true;
+                                                  //   });
+                                                  // }
+                                                  return NotificationCard(
+                                                      context, e);
+                                                }).toList();
+
+                                                // return [
+                                                //   PopupMenuItem(
+                                                //       value: "Notifications",
+                                                //       child: SizedBox(
+                                                //           width: MediaQuery.of(context)
+                                                //                   .size
+                                                //                   .width /
+                                                //               1,
+                                                //           child: Card(
+                                                //               child: Text(
+                                                //                   "Sample Notification"))))
+                                                // ];
+                                              },
+                                            ),
+                                          );
+                                        } else {
+                                          return const Text(
+                                              "Loading Notification");
+                                        }
+                                      }),
+                                  CircleAvatar(
+                                    backgroundColor: avatarColor,
+                                    child: Text(userEmail[0].toUpperCase()),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 1,
-                        color: Colors.black12,
-                      ),
-                      SingleChildScrollView(
-                        child: getPage(),
-                      )
-                    ],
+                        Container(
+                          height: 1,
+                          color: Colors.black12,
+                        ),
+                        SingleChildScrollView(
+                          child: getPage(),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -410,8 +418,10 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
         {
           return VariantPage(title: currentPage);
         }
-      // case 'Sent Notification':
-      //   {}
+      case 'PDF REPORT':
+        {
+          return PDFPage(title: 'PDF Report');
+        }
     }
   }
 
@@ -680,6 +690,9 @@ class _LeftDrawerState extends State<LeftDrawer> {
         .add(_tile(Icon(Icons.person_add_disabled), 'Reported Cases', context));
     result.add(_tile(const Icon(Icons.report_gmailerrorred),
         'Report SARS-COV2 Variant', context));
+    result
+        .add(_tile(const Icon(Icons.document_scanner), 'PDF REPORT', context));
+
     if (isAdmin) {
       result.add(_tile(
           const Icon(Icons.notification_add), 'Send Notification', context));

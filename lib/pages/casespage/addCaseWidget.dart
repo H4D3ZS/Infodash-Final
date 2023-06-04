@@ -1,4 +1,4 @@
-// ignore_for_file: prefer__literals_to_create_immutables, prefer__ructors, unnecessary_new
+// ignore_for_file: prefer__literals_to_create_immutables, prefer__ructors, unnecessary_new, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +9,8 @@ import 'package:infodash_app/infodashlib/Cases/CasesInfoManager.dart';
 class AddCase extends StatefulWidget {
   final Future<List<String>> baranggays;
   final VoidCallback notifyParent;
-  const AddCase({super.key, required this.baranggays, required this.notifyParent});
+  const AddCase(
+      {super.key, required this.baranggays, required this.notifyParent});
   @override
   State<AddCase> createState() => _AddCaseState();
 }
@@ -119,7 +120,8 @@ class _AddCaseState extends State<AddCase> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   child: const Text(
                                     "Subdivision :",
                                     textAlign: TextAlign.right,
@@ -154,10 +156,14 @@ class _AddCaseState extends State<AddCase> {
                                                         .width /
                                                     2,
                                                 child: Container(
-                                                    margin: const EdgeInsets.only(
-                                                        left: 10, right: 10),
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10),
                                                     child: Container(
-                                                      margin: const EdgeInsets.all(8),
+                                                      margin:
+                                                          const EdgeInsets.all(
+                                                              8),
                                                       child:
                                                           SingleChildScrollView(
                                                         child: Column(
@@ -227,8 +233,7 @@ class _AddCaseState extends State<AddCase> {
                                                                   10,
                                                               child:
                                                                   TextFormField(
-                                                                inputFormatters: <
-                                                                    TextInputFormatter>[
+                                                                inputFormatters: <TextInputFormatter>[
                                                                   FilteringTextInputFormatter
                                                                       .allow(RegExp(
                                                                           r'[0-9]'))
@@ -257,8 +262,7 @@ class _AddCaseState extends State<AddCase> {
                                                                   10,
                                                               child:
                                                                   TextFormField(
-                                                                inputFormatters: <
-                                                                    TextInputFormatter>[
+                                                                inputFormatters: <TextInputFormatter>[
                                                                   FilteringTextInputFormatter
                                                                       .allow(RegExp(
                                                                           r'[0-9]'))
@@ -287,8 +291,7 @@ class _AddCaseState extends State<AddCase> {
                                                                   10,
                                                               child:
                                                                   TextFormField(
-                                                                inputFormatters: <
-                                                                    TextInputFormatter>[
+                                                                inputFormatters: <TextInputFormatter>[
                                                                   FilteringTextInputFormatter
                                                                       .allow(RegExp(
                                                                           r'[0-9]'))
@@ -317,8 +320,7 @@ class _AddCaseState extends State<AddCase> {
                                                                   10,
                                                               child:
                                                                   TextFormField(
-                                                                inputFormatters: <
-                                                                    TextInputFormatter>[
+                                                                inputFormatters: <TextInputFormatter>[
                                                                   FilteringTextInputFormatter
                                                                       .allow(RegExp(
                                                                           r'[0-9]'))
@@ -339,8 +341,9 @@ class _AddCaseState extends State<AddCase> {
                                                               ),
                                                             ),
                                                             Container(
-                                                              margin: const EdgeInsets
-                                                                  .only(
+                                                              margin:
+                                                                  const EdgeInsets
+                                                                          .only(
                                                                       top: 20),
                                                               child: Flex(
                                                                 direction: Axis
@@ -411,7 +414,8 @@ class _AddCaseState extends State<AddCase> {
                                                                             "Add"),
                                                                       )),
                                                                   Container(
-                                                                    margin: const EdgeInsets.only(
+                                                                    margin: const EdgeInsets
+                                                                            .only(
                                                                         left:
                                                                             10,
                                                                         right:
@@ -461,7 +465,8 @@ class _AddCaseState extends State<AddCase> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 Container(
-                                  margin: const EdgeInsets.fromLTRB(10, 0, 5, 0),
+                                  margin:
+                                      const EdgeInsets.fromLTRB(10, 0, 5, 0),
                                   child: const Text(
                                     "Status: ",
                                     textAlign: TextAlign.right,
@@ -545,7 +550,8 @@ class _AddCaseState extends State<AddCase> {
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                            title: const Text("Saved Successfully!"),
+                                            title: const Text(
+                                                "Saved Successfully!"),
                                             actions: [
                                               ElevatedButton(
                                                   onPressed: () {
@@ -562,7 +568,8 @@ class _AddCaseState extends State<AddCase> {
                                       child: Text("Add"),
                                     )),
                                 Container(
-                                  margin: const EdgeInsets.only(left: 10, right: 10),
+                                  margin: const EdgeInsets.only(
+                                      left: 10, right: 10),
                                   child: ElevatedButton(
                                       style: ButtonStyle(backgroundColor:
                                           MaterialStateProperty.resolveWith(

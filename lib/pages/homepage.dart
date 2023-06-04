@@ -78,7 +78,8 @@ class _HomePageState extends State<HomePage> {
                       reverse: false,
                       autoPlay: true,
                       autoPlayInterval: const Duration(seconds: 10),
-                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 800),
                       autoPlayCurve: Curves.fastOutSlowIn,
                       enlargeCenterPage: true,
                     ),
@@ -93,7 +94,8 @@ class _HomePageState extends State<HomePage> {
                             children: [
                               Text(
                                 i.title,
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               Image(
                                 image: NetworkImage(i.media),
@@ -154,7 +156,7 @@ class _HomePageState extends State<HomePage> {
     final uri =
         Uri.https('api.newscatcherapi.com', '/v2/search', queryParameters);
     final response = await http.get(uri,
-        headers: {'x-api-key': 'K09DxtlC6r4FvmHAMt-fhZuhE2mfESXmGd6K_IoOVs0'});
+        headers: {'x-api-key': 'qWhhOV8km6wibadZ0C4w-MEQVLn95xprvEvR7VQ4H4Y'});
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "65544552444",
+    "project_id": "infodash-a991c",
+    "storage_bucket": "infodash-a991c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:65544552444:android:f28b6451173dc0dab43c79",
+        "android_client_info": {
+          "package_name": "com.example.infodash_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "65544552444-b8lkmhmui11ruhnoeebsohlp376en8ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7U1td3fD5fcGaXVPFLBtWf-9_LgnhJ2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "65544552444-b8lkmhmui11ruhnoeebsohlp376en8ij.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "65544552444-f7moprj8rk1btu53bitmehcvi371eqhi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.infodash"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -79,7 +79,7 @@ class MyWidgetState extends State<Home> with SingleTickerProviderStateMixin {
                   ),
                   Container(
                     height: 1,
-                    color: Colors.black12,
+                    // color: Colors.black12,
                   ),
                   Container(
                     child: getPage(),

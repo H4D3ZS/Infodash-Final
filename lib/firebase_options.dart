@@ -28,7 +28,10 @@ class DefaultFirebaseOptions {
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -47,30 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCMJFs7_QflHHi195ShoknlXfga6rRCRIs',
-    appId: '1:650264728630:web:baa86963f37d165c077497',
-    messagingSenderId: '650264728630',
-    projectId: 'infodash-latest',
-    authDomain: 'infodash-latest.firebaseapp.com',
-    storageBucket: 'infodash-latest.appspot.com',
-    measurementId: 'G-B7S9X23MRV',
+    apiKey: 'AIzaSyCn6q5BeWbNbbTpFbXP7ZKSfo8B0Hy4tJw',
+    appId: '1:65544552444:web:06cbbdfd58656ca2b43c79',
+    messagingSenderId: '65544552444',
+    projectId: 'infodash-a991c',
+    authDomain: 'infodash-a991c.firebaseapp.com',
+    storageBucket: 'infodash-a991c.appspot.com',
+    measurementId: 'G-PMPKVQM24K',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCrvqifKs_3OzIL4Eh_VUhNxS6Ej91-D2U',
-    appId: '1:650264728630:android:125119120ed24bab077497',
-    messagingSenderId: '650264728630',
-    projectId: 'infodash-latest',
-    storageBucket: 'infodash-latest.appspot.com',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDtn5RTXU2WKP70stjxXxSNtxRcXWMCh0A',
-    appId: '1:650264728630:ios:8dd76d73bd600439077497',
-    messagingSenderId: '650264728630',
-    projectId: 'infodash-latest',
-    storageBucket: 'infodash-latest.appspot.com',
-    iosClientId: '650264728630-77d1qhb36iiorn4uuob315c86o37ea3s.apps.googleusercontent.com',
-    iosBundleId: 'com.example.infodashApp',
+    apiKey: 'AIzaSyC7U1td3fD5fcGaXVPFLBtWf-9_LgnhJ2g',
+    appId: '1:65544552444:android:f28b6451173dc0dab43c79',
+    messagingSenderId: '65544552444',
+    projectId: 'infodash-a991c',
+    storageBucket: 'infodash-a991c.appspot.com',
   );
 }

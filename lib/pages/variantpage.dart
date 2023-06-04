@@ -210,8 +210,8 @@ class _VariantPageState extends State<VariantPage> {
                                                   builder: (context) {
                                                     return SizedBox(
                                                         child: AlertDialog(
-                                                      title:
-                                                          const Text("Save Changes?"),
+                                                      title: const Text(
+                                                          "Save Changes?"),
                                                       actionsAlignment:
                                                           MainAxisAlignment.end,
                                                       actions: [
@@ -234,7 +234,8 @@ class _VariantPageState extends State<VariantPage> {
                                                               color:
                                                                   Colors.green,
                                                             ),
-                                                            label: const Text("Yes")),
+                                                            label: const Text(
+                                                                "Yes")),
                                                         ElevatedButton.icon(
                                                             onPressed: () {
                                                               Navigator.pop(
@@ -244,8 +245,8 @@ class _VariantPageState extends State<VariantPage> {
                                                               Icons.cancel,
                                                               color: Colors.red,
                                                             ),
-                                                            label:
-                                                                const Text("Cancel"))
+                                                            label: const Text(
+                                                                "Cancel"))
                                                       ],
                                                     ));
                                                   },

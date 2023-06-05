@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
     final uri =
         Uri.https('api.newscatcherapi.com', '/v2/search', queryParameters);
     final response = await http.get(uri,
-        headers: {'x-api-key': 'qWhhOV8km6wibadZ0C4w-MEQVLn95xprvEvR7VQ4H4Y'});
+        headers: {'x-api-key': 'H1icsjqKi15NapfeT-1yA2Ds1yHs-6oLrJu6FmdzO8A'});
 
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
